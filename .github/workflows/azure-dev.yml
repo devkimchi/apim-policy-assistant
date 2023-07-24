@@ -1,3 +1,5 @@
+name: 'Azure Dev'
+
 on:
   workflow_dispatch:
   push:
