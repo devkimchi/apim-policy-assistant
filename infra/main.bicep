@@ -36,5 +36,7 @@ module apim './provision-ApiManagement.bicep' = {
     tags: tags
     apiManagementPublisherName: apiManagementPublisherName
     apiManagementPublisherEmail: apiManagementPublisherEmail
+    apiManagementPolicyFormat: 'xml-link'
+    apiManagementPolicyValue: 'https://raw.githubusercontent.com/devkimchi/apim-policy-assistant/main/infra/apim-policy-global.xml'
   }
 }
