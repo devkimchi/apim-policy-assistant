@@ -22,3 +22,8 @@ module aoai './openAI.bicep' = {
     aoaiModels: aoaiModels
   }
 }
+
+output name string = aoai.outputs.name
+output endpoint string = aoai.outputs.endpoint
+output apiKey string = aoai.outputs.apiKey
+output deploymentId string = aoaiModels[0].deploymentName

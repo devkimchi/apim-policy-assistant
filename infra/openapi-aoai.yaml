@@ -1,0 +1,48 @@
+openapi: 3.0.1
+info:
+  title: APIM Policy Assistant API
+  description: This is a set of API to provide AI assistant feature to generate APIM policies.
+  license:
+    name: MIT
+    url: http://opensource.org/licenses/MIT
+  version: 1.0.0
+servers:
+  - url: http://localhost:7071/api
+paths:
+  /completions:
+    post:
+      tags:
+        - completions
+      summary: Gets the completion from the OpenAI API
+      description: This gets the completion from the OpenAI API.
+      operationId: getCompletions
+      requestBody:
+        description: The prompt to generate the completion.
+        content:
+          text/plain:
+            schema:
+              type: string
+        required: true
+      responses:
+        '200':
+          description: This returns the completion generated from the OpenAI API.
+          content:
+            text/plain:
+              schema:
+                type: string
+          x-ms-summary: The completion generated from the OpenAI API.
+        '400':
+          description: This indicates the request is invalid.
+          x-ms-summary: Invalid request.
+        '500':
+          description: This indicates the server is not working as expected.
+          x-ms-summary: Internal server error.
+      security:
+        - function_key: [ ]
+      x-ms-visibility: important
+components:
+  securitySchemes:
+    function_key:
+      type: apiKey
+      name: x-functions-key
+      in: header

@@ -68,7 +68,7 @@ public class CompletionHttpTrigger
             return response;
         }
 
-        var endpoint = new Uri(string.Format(CultureInfo.InvariantCulture, this._openAISettings.Endpoint, this._openAISettings.Instance));
+        var endpoint = new Uri(this._openAISettings.Endpoint);
         var credential = new AzureKeyCredential(this._openAISettings.AuthKey);
         var client = new OpenAIClient(endpoint, credential);
 

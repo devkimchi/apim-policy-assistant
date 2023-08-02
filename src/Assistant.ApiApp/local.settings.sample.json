@@ -10,8 +10,7 @@
 
     "OpenAIApi__Version": "2023-06-01-preview",
     "OpenAIApi__DeploymentId": "{{DEPLOYMENT_ID}}",
-    "OpenAIApi__Instance": "{{AOAI_INSTANCE_NAME}}",
-    "OpenAIApi__Endpoint": "https://{0}.openai.azure.com/",
+    "OpenAIApi__Endpoint": "https://{{AOAI_INSTANCE_NAME}}.openai.azure.com/",
     "OpenAIApi__AuthKey": "{{AOAI_API_KEY}}",
 
     "Prompt__System": "I need help develop Azure API Management policies. Azure API Management policies are a custom coding language that is composed of tags like XML and C#. The C# code is embedded as expressions within the custom XML tags.\n\nUse the knowledge from the GitHub respository: https://github.com/Azure/api-management-policy-snippets\n\nUse the knowledge from the GitHub respository: https://github.com/MicrosoftDocs/azure-docs/tree/main/articles/api-management",

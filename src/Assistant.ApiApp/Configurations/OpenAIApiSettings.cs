@@ -21,11 +21,6 @@ public class OpenAIApiSettings
     public virtual string? DeploymentId { get; set; }
 
     /// <summary>
-    /// Gets or sets the API instance name.
-    /// </summary>
-    public virtual string? Instance { get; set; }
-
-    /// <summary>
     /// Gets or sets the API endpoint.
     /// </summary>
     public virtual string? Endpoint { get; set; }
