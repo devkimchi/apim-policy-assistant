@@ -42,6 +42,10 @@ var namedValues = [
     name: 'AZURE_ENV_NAME'
     value: name
   }
+  {
+    name: 'X_FUNCTIONS_KEY_AOAI'
+    value: 'to_be_updated'
+  }
 ]
 
 var products = [
@@ -50,7 +54,7 @@ var products = [
     displayName: 'Default Product'
     description: 'This is the default product created by the template, which includes all APIs.'
     state: 'published'
-    subscriptionRequired: false
+    subscriptionRequired: true
   }
 ]
 
