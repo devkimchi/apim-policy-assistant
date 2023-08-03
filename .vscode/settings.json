@@ -1,5 +1,5 @@
 {
-  "dotnet.defaultSolution": "SocialAIAssistant.sln",
+  "dotnet.defaultSolution": "ApimPolicyAssistant.sln",
   "azureFunctions.projectSubpath": "src/Assistant.ApiApp",
   "azureFunctions.deploySubpath": "src/Assistant.ApiApp/bin/Release/net7.0/publish",
   "azureFunctions.projectLanguage": "C#",
