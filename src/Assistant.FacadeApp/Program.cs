@@ -17,15 +17,15 @@ var host = new HostBuilder()
                 .ConfigureHostConfiguration(config => config.AddEnvironmentVariables())
                 .ConfigureServices(services =>
                 {
-                    var openAIApiSettings = services.BuildServiceProvider()
+                    var apimSettings = services.BuildServiceProvider()
                             .GetService<IConfiguration>()
                             .Get<ApimSettings>(ApimSettings.Name);
-                    services.AddSingleton(openAIApiSettings);
+                    services.AddSingleton(apimSettings);
 
-                    var promptSettings = services.BuildServiceProvider()
+                    var graphSettings = services.BuildServiceProvider()
                             .GetService<IConfiguration>()
                             .Get<MSGraphSettings>(MSGraphSettings.Name);
-                    services.AddSingleton(promptSettings);
+                    services.AddSingleton(graphSettings);
 
                     services.AddSingleton<IOpenApiConfigurationOptions>(_ =>
                     {
@@ -49,7 +49,15 @@ var host = new HostBuilder()
                     });
 
                     services.AddHttpClient("aoai");
-                    services.AddScoped<IAoaiClient, AoaiClient>();
+                    services.AddScoped<IAoaiClient, AoaiClient>(provider =>
+                    {
+                        var aoai = new AoaiClient(provider.GetRequiredService<IHttpClientFactory>())
+                        {
+                            BaseUrl = apimSettings.BaseUrl,
+                        };
+
+                        return aoai;
+                    });
                 })
                 .Build();
 

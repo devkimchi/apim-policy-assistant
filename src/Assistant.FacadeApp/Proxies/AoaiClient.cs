@@ -2,6 +2,9 @@ using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Extensions;
 
 namespace ApimAIAssistant.FacadeApp.Proxies;
 
+/// <summary>
+/// This provides interface to the <see cref="AoaiClient"/> class.
+/// </summary>
 public interface IAoaiClient
 {
     /// <summary>
@@ -25,6 +28,9 @@ public interface IAoaiClient
     Task<string> GetCompletionsAsync(string completionsPostRequest, CancellationToken cancellationToken);
 }
 
+/// <summary>
+/// This represents the proxy client entity to backend API for AOAI.
+/// </summary>
 public partial class AoaiClient : IAoaiClient
 {
     public AoaiClient(IHttpClientFactory factory)
