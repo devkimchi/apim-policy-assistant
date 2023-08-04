@@ -13,6 +13,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 
 using SocialAIAssistant.ApiApp.Configurations;
+using SocialAIAssistant.ApiApp.Examples;
 
 namespace SocialAIAssistant.ApiApp.Triggers;
 
@@ -46,10 +47,10 @@ public class CompletionHttpTrigger
     [Function(nameof(CompletionHttpTrigger.GetCompletionsAsync))]
     [OpenApiOperation(operationId: "getCompletions", tags: new[] { "completions" }, Summary = "Gets the completion from the OpenAI API", Description = "This gets the completion from the OpenAI API.", Visibility = OpenApiVisibilityType.Important)]
     [OpenApiSecurity(schemeName: "function_key", schemeType: SecuritySchemeType.ApiKey, Name = "x-functions-key", In = OpenApiSecurityLocationType.Header)]
-    [OpenApiRequestBody(contentType: "text/plain", bodyType: typeof(string), Required = true, Description = "The prompt to generate the completion.")]
-    [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "text/plain", bodyType: typeof(string), Summary = "The completion generated from the OpenAI API.", Description = "This returns the completion generated from the OpenAI API.")]
-    [OpenApiResponseWithoutBody(statusCode: HttpStatusCode.BadRequest, Summary = "Invalid request.", Description = "This indicates the request is invalid.")]
-    [OpenApiResponseWithoutBody(statusCode: HttpStatusCode.InternalServerError, Summary = "Internal server error.", Description = "This indicates the server is not working as expected.")]
+    [OpenApiRequestBody(contentType: "text/plain", bodyType: typeof(string), Required = true, Example = typeof(PromptExample), Description = "The prompt to generate the completion.")]
+    [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "text/markdown", bodyType: typeof(string), Example = typeof(CompletionExample), Summary = "The completion generated from the OpenAI API.", Description = "This returns the completion generated from the OpenAI API.")]
+    [OpenApiResponseWithBody(statusCode: HttpStatusCode.BadRequest, contentType: "text/plain", bodyType: typeof(string),  Example = typeof(BadRequestExample), Summary = "Invalid request.", Description = "This indicates the request is invalid.")]
+    [OpenApiResponseWithBody(statusCode: HttpStatusCode.InternalServerError, contentType: "text/plain", bodyType: typeof(string), Example = typeof(InternalServerErrorExample), Summary = "Internal server error.", Description = "This indicates the server is not working as expected.")]
     public async Task<HttpResponseData> GetCompletionsAsync([HttpTrigger(AuthorizationLevel.Function, "POST", Route = "completions")] HttpRequestData req)
     {
         this._logger.LogInformation("C# HTTP trigger function processed a request.");
@@ -99,7 +100,8 @@ public class CompletionHttpTrigger
             this._logger.LogInformation(message);
 
             response = req.CreateResponse(HttpStatusCode.OK);
-            response.Headers.Add("Content-Type", "text/plain; charset=utf-8");
+            // response.Headers.Add("Content-Type", "text/plain; charset=utf-8");
+            response.Headers.Add("Content-Type", "text/markdown; charset=utf-8; variant=GFM");
 
             response.WriteString(message);
 

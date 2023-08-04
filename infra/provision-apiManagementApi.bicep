@@ -46,7 +46,7 @@ param apiManagementApiOperations array = [
 param apiManagementProductName string = 'default'
 
 module apimapi './apiManagementApi.bicep' = {
-  name: 'ApiManagementApi_APIM_${apiManagementApiName}'
+  name: 'APIManagement_API_${apiManagementApiName}'
   params: {
     name: name
     location: location

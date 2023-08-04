@@ -40,6 +40,10 @@ It's your friendly assistant to generate [Azure API Management policy documents]
    azd up
    ```
 
+   > You might be asked to input your GitHub username and repository name.
+
+### Deploying Applications to Azure
+
 1. Run the commands below to deploy apps to Azure:
 
    ```bash
@@ -47,4 +51,12 @@ It's your friendly assistant to generate [Azure API Management policy documents]
    gh auth login
    azd pipeline config
    gh workflow run "Azure Dev" --repo $GITHUB_USERNAME/apim-policy-assistant
+   ```
+
+### Deprovisioning Azure Resources
+
+1. To avoid unexpected billing shock, run the commands below to deprovision Azure resources:
+
+   ```bash
+   azd down
    ```

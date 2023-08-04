@@ -3,13 +3,18 @@ param location string = 'eastus'
 
 param tags object = {}
 
+param aoaiModelName string = 'gpt-35-turbo-16k'
+param aoaiModelVersion string = '0613'
+param aoaiModelSkuName string = 'Standard'
+param aoaiModelSkuCapacity int = 30
+
 param aoaiModels array = [
   {
-    name: 'gpt-35-turbo-16k'
-    deploymentName: 'model-gpt35turbo16k'
-    version: '0613'
-    skuName: 'Standard'
-    skuCapacity: 120
+    name: aoaiModelName
+    deploymentName: 'model-${replace(aoaiModelName, '-', '')}'
+    version: aoaiModelVersion
+    skuName: aoaiModelSkuName
+    skuCapacity: aoaiModelSkuCapacity
   }
 ]
 

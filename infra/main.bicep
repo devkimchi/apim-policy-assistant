@@ -11,6 +11,11 @@ param gitHubUsername string
 param gitHubRepositoryName string
 param gitHubBranchName string = 'main'
 
+param aoaiModelName string = 'gpt-35-turbo-16k'
+param aoaiModelVersion string = '0613'
+param aoaiModelSkuName string = 'Standard'
+param aoaiModelSkuCapacity int = 30
+
 // tags that should be applied to all resources.
 var tags = {
   // Tag all resources with the environment name.
@@ -45,6 +50,10 @@ module cogsvc './provision-CognitiveServices.bicep' = {
   params: {
     name: name
     tags: tags
+    aoaiModelName: aoaiModelName
+    aoaiModelVersion: aoaiModelVersion
+    aoaiModelSkuName: aoaiModelSkuName
+    aoaiModelSkuCapacity: aoaiModelSkuCapacity
   }
 }
 
@@ -62,7 +71,7 @@ module apim './provision-ApiManagement.bicep' = {
   }
 }
 
-module fncapps './provision-functionApp.bicep' = [for (app, index) in apps: if (app.isFunctionApp == true) {
+module fncapps './provision-FunctionApp.bicep' = [for (app, index) in apps: if (app.isFunctionApp == true) {
   name: 'FunctionApp_${app.apiName}'
   scope: rg
   dependsOn: [
@@ -81,7 +90,7 @@ module fncapps './provision-functionApp.bicep' = [for (app, index) in apps: if (
   }
 }]
 
-module apis './provision-apiManagementApi.bicep' = [for (app, index) in apps: {
+module apis './provision-ApiManagementApi.bicep' = [for (app, index) in apps: {
   name: 'ApiManagementApi_${app.apiName}'
   scope: rg
   dependsOn: [

@@ -16,7 +16,7 @@ var shortname = '${name}${replace(suffix, '-', '')}'
 var longname = '${name}-${suffix}'
 
 module st './storageAccount.bicep' = {
-  name: 'StorageAccount_FunctionApp_${suffix}'
+  name: 'FunctionApp_${suffix}_StorageAccount'
   params: {
     name: shortname
     location: location
@@ -26,7 +26,7 @@ module st './storageAccount.bicep' = {
 }
 
 module wrkspc './logAnalyticsWorkspace.bicep' = {
-  name: 'LogAnalyticsWorkspace_FunctionApp_${suffix}'
+  name: 'FunctionApp_${suffix}_LogAnalyticsWorkspace'
   params: {
     name: longname
     location: location
@@ -35,7 +35,7 @@ module wrkspc './logAnalyticsWorkspace.bicep' = {
 }
 
 module appins './applicationInsights.bicep' = {
-  name: 'ApplicationInsights_FunctionApp_${suffix}'
+  name: 'FunctionApp_${suffix}_ApplicationInsights'
   params: {
     name: longname
     location: location
@@ -45,7 +45,7 @@ module appins './applicationInsights.bicep' = {
 }
 
 module csplan './consumptionPlan.bicep' = {
-  name: 'ConsumptionPlan_FunctionApp_${suffix}'
+  name: 'FunctionApp_${suffix}_ConsumptionPlan'
   params: {
     name: longname
     location: location
@@ -54,7 +54,7 @@ module csplan './consumptionPlan.bicep' = {
 }
 
 module fncapp './functionApp.bicep' = {
-  name: 'FunctionApp_FunctionApp_${suffix}'
+  name: 'FunctionApp_${suffix}_FunctionApp'
   params: {
     name: name
     suffix: suffix

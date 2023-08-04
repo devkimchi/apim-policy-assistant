@@ -9,7 +9,7 @@ param aoaiModels array = [
     deploymentName: 'model-gpt35turbo16k'
     version: '0613'
     skuName: 'Standard'
-    skuCapacity: 120
+    skuCapacity: 30
   }
 ]
 
