@@ -1,5 +1,7 @@
-using System.Globalization;
 using System.Net;
+
+using ApimAIAssistant.ApiApp.Configurations;
+using ApimAIAssistant.ApiApp.Examples;
 
 using Azure;
 using Azure.AI.OpenAI;
@@ -12,10 +14,7 @@ using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Extensions;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 
-using SocialAIAssistant.ApiApp.Configurations;
-using SocialAIAssistant.ApiApp.Examples;
-
-namespace SocialAIAssistant.ApiApp.Triggers;
+namespace ApimAIAssistant.ApiApp.Triggers;
 
 /// <summary>
 /// This represents the HTTP trigger entity for ChatGPT completion.
@@ -104,8 +103,6 @@ public class CompletionHttpTrigger
             response.Headers.Add("Content-Type", "text/markdown; charset=utf-8; variant=GFM");
 
             response.WriteString(message);
-
-            return response;
         }
         catch (Exception ex)
         {
@@ -115,8 +112,8 @@ public class CompletionHttpTrigger
             response.Headers.Add("Content-Type", "text/plain; charset=utf-8");
 
             response.WriteString("Internal server error.");
-
-            return response;
         }
+
+        return response;
     }
 }

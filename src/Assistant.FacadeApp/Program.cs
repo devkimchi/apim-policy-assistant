@@ -1,3 +1,6 @@
+using ApimAIAssistant.FacadeApp.Configurations;
+using ApimAIAssistant.FacadeApp.Proxies;
+
 using Microsoft.Azure.Functions.Worker.Extensions.OpenApi.Extensions;
 using Microsoft.Azure.WebJobs.Extensions.OpenApi.Configurations.AppSettings.Extensions;
 using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions;
@@ -8,8 +11,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 
-using ApimAIAssistant.ApiApp.Configurations;
-
 var host = new HostBuilder()
                 .ConfigureFunctionsWorkerDefaults(worker => worker.UseNewtonsoftJson())
                 //.ConfigureOpenApi()
@@ -18,12 +19,12 @@ var host = new HostBuilder()
                 {
                     var openAIApiSettings = services.BuildServiceProvider()
                             .GetService<IConfiguration>()
-                            .Get<OpenAIApiSettings>(OpenAIApiSettings.Name);
+                            .Get<ApimSettings>(ApimSettings.Name);
                     services.AddSingleton(openAIApiSettings);
 
                     var promptSettings = services.BuildServiceProvider()
                             .GetService<IConfiguration>()
-                            .Get<PromptSettings>(PromptSettings.Name);
+                            .Get<MSGraphSettings>(MSGraphSettings.Name);
                     services.AddSingleton(promptSettings);
 
                     services.AddSingleton<IOpenApiConfigurationOptions>(_ =>
@@ -46,6 +47,9 @@ var host = new HostBuilder()
 
                         return options;
                     });
+
+                    services.AddHttpClient("aoai");
+                    services.AddScoped<IAoaiClient, AoaiClient>();
                 })
                 .Build();
 
