@@ -49,15 +49,7 @@ var host = new HostBuilder()
                     });
 
                     services.AddHttpClient("aoai");
-                    services.AddScoped<IAoaiClient, AoaiClient>(provider =>
-                    {
-                        var aoai = new AoaiClient(provider.GetRequiredService<IHttpClientFactory>())
-                        {
-                            BaseUrl = apimSettings.BaseUrl,
-                        };
-
-                        return aoai;
-                    });
+                    services.AddScoped<IAoaiClient, AoaiClient>();
                 })
                 .Build();
 
