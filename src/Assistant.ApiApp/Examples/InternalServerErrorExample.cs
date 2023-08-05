@@ -3,7 +3,7 @@ using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Resolvers;
 
 using Newtonsoft.Json.Serialization;
 
-namespace SocialAIAssistant.ApiApp.Examples;
+namespace ApimAIAssistant.ApiApp.Examples;
 
 /// <summary>
 /// This represents the example entity for `Internal Server Error`.

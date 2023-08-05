@@ -1,4 +1,4 @@
-﻿namespace SocialAIAssistant.ApiApp.Configurations;
+namespace ApimAIAssistant.ApiApp.Configurations;
 
 /// <summary>
 /// This represents the settings entity for the prompt.

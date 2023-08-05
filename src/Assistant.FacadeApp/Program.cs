@@ -1,4 +1,5 @@
-using ApimAIAssistant.ApiApp.Configurations;
+using ApimAIAssistant.FacadeApp.Configurations;
+using ApimAIAssistant.FacadeApp.Proxies;
 
 using Microsoft.Azure.Functions.Worker.Extensions.OpenApi.Extensions;
 using Microsoft.Azure.WebJobs.Extensions.OpenApi.Configurations.AppSettings.Extensions;
@@ -16,15 +17,15 @@ var host = new HostBuilder()
                 .ConfigureHostConfiguration(config => config.AddEnvironmentVariables())
                 .ConfigureServices(services =>
                 {
-                    var openAIApiSettings = services.BuildServiceProvider()
+                    var apimSettings = services.BuildServiceProvider()
                             .GetService<IConfiguration>()
-                            .Get<OpenAIApiSettings>(OpenAIApiSettings.Name);
-                    services.AddSingleton(openAIApiSettings);
+                            .Get<ApimSettings>(ApimSettings.Name);
+                    services.AddSingleton(apimSettings);
 
-                    var promptSettings = services.BuildServiceProvider()
+                    var graphSettings = services.BuildServiceProvider()
                             .GetService<IConfiguration>()
-                            .Get<PromptSettings>(PromptSettings.Name);
-                    services.AddSingleton(promptSettings);
+                            .Get<MSGraphSettings>(MSGraphSettings.Name);
+                    services.AddSingleton(graphSettings);
 
                     services.AddSingleton<IOpenApiConfigurationOptions>(_ =>
                     {
@@ -45,6 +46,15 @@ var host = new HostBuilder()
                         };
 
                         return options;
+                    });
+
+                    services.AddHttpClient("aoai");
+                    services.AddScoped<IAoaiClient, AoaiClient>(provider =>
+                    {
+                        var factory = provider.GetService<IHttpClientFactory>();
+                        var client = new AoaiClient(factory) { ReadResponseAsString = true };
+
+                        return client;
                     });
                 })
                 .Build();

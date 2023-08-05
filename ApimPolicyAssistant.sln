@@ -5,7 +5,9 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{9F06FCB0-34D9-418A-B80A-74FFDF8D4210}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assistant.ApiApp", "src\Assistant.ApiApp\Assistant.ApiApp.csproj", "{84E709AE-FD4C-49A1-8FA2-571990D01CA7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Assistant.ApiApp", "src\Assistant.ApiApp\Assistant.ApiApp.csproj", "{84E709AE-FD4C-49A1-8FA2-571990D01CA7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assistant.FacadeApp", "src\Assistant.FacadeApp\Assistant.FacadeApp.csproj", "{89758098-C4B6-49DB-839C-24338A9CE552}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,12 +19,17 @@ Global
 		{84E709AE-FD4C-49A1-8FA2-571990D01CA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{84E709AE-FD4C-49A1-8FA2-571990D01CA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{84E709AE-FD4C-49A1-8FA2-571990D01CA7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89758098-C4B6-49DB-839C-24338A9CE552}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89758098-C4B6-49DB-839C-24338A9CE552}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89758098-C4B6-49DB-839C-24338A9CE552}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89758098-C4B6-49DB-839C-24338A9CE552}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{84E709AE-FD4C-49A1-8FA2-571990D01CA7} = {9F06FCB0-34D9-418A-B80A-74FFDF8D4210}
+		{89758098-C4B6-49DB-839C-24338A9CE552} = {9F06FCB0-34D9-418A-B80A-74FFDF8D4210}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {04CBD62A-2966-489E-B26B-95385739494C}
