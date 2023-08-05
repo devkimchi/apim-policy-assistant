@@ -10,5 +10,8 @@
     "MSGraph__TenantId": "{{AZURE_AD_TENANT_ID}}",
     "MSGraph__ClientId": "{{AZURE_AD_CLIENT_ID}}",
     "MSGraph__ClientSecret": "{{AZURE_AD_CLIENT_SECRET}}"
+  },
+  "Host": {
+    "CORS": "*"
   }
 }
