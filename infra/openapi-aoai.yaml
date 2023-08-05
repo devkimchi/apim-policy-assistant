@@ -30,7 +30,7 @@ paths:
         '200':
           description: This returns the completion generated from the OpenAI API.
           content:
-            text/markdown:
+            text/plain:
               schema:
                 type: string
               examples:

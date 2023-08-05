@@ -1,3 +1,5 @@
+using ApimAIAssistant.ApiApp.Configurations;
+
 using Microsoft.Azure.Functions.Worker.Extensions.OpenApi.Extensions;
 using Microsoft.Azure.WebJobs.Extensions.OpenApi.Configurations.AppSettings.Extensions;
 using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions;
@@ -7,8 +9,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-
-using ApimAIAssistant.ApiApp.Configurations;
 
 var host = new HostBuilder()
                 .ConfigureFunctionsWorkerDefaults(worker => worker.UseNewtonsoftJson())

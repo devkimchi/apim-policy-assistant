@@ -5,8 +5,8 @@
     "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated",
 
     "OpenApi__DocVersion": "1.0.0",
-    "OpenApi__DocTitle": "Social AI Assistant API",
-    "OpenApi__DocDescription": "This is a set of API to provide AI assistant feature to generate documents.",
+    "OpenApi__DocTitle": "APIM Policy Assistant API",
+    "OpenApi__DocDescription": "This is a set of API to provide AI assistant feature to generate APIM policies.",
 
     "OpenAIApi__Version": "2023-06-01-preview",
     "OpenAIApi__DeploymentId": "{{DEPLOYMENT_ID}}",
