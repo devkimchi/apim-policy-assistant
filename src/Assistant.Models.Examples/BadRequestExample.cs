@@ -3,19 +3,19 @@ using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Resolvers;
 
 using Newtonsoft.Json.Serialization;
 
-namespace ApimAIAssistant.ApiApp.Examples;
+namespace ApimAIAssistant.Models.Examples;
 
 /// <summary>
-/// This represents the example entity for prompt.
+/// This represents the example entity for `Bad Request`.
 /// </summary>
-public class PromptExample : OpenApiExample<string>
+public class BadRequestExample : OpenApiExample<string>
 {
     /// <inheritdoc />
     public override IOpenApiExample<string> Build(NamingStrategy namingStrategy = null)
     {
-        var prompt = "Show me the APIM policy document in general.";
+        var error = "The prompt is required.";
 
-        this.Examples.Add(OpenApiExampleResolver.Resolve("prompt", prompt, namingStrategy));
+        this.Examples.Add(OpenApiExampleResolver.Resolve("error", error, namingStrategy));
 
         return this;
     }

@@ -3,17 +3,17 @@ using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Resolvers;
 
 using Newtonsoft.Json.Serialization;
 
-namespace ApimAIAssistant.ApiApp.Examples;
+namespace ApimAIAssistant.Models.Examples;
 
 /// <summary>
-/// This represents the example entity for `Bad Request`.
+/// This represents the example entity for `Internal Server Error`.
 /// </summary>
-public class BadRequestExample : OpenApiExample<string>
+public class InternalServerErrorExample : OpenApiExample<string>
 {
     /// <inheritdoc />
     public override IOpenApiExample<string> Build(NamingStrategy namingStrategy = null)
     {
-        var error = "The prompt is required.";
+        var error = "Internal server error.";
 
         this.Examples.Add(OpenApiExampleResolver.Resolve("error", error, namingStrategy));
 

@@ -12,7 +12,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <OpenApiReference Include="..\..\infra\swagger-apim-aoai.json" CodeGenerator="NSwagCSharp" Namespace="ApimAIAssistant.FacadeApp.Proxies" ClassName="AoaiClient" Link="OpenAPIs\swagger-apim-aoai.json" />
+    <OpenApiReference Include="..\..\infra\swagger-apim-aoai.json" CodeGenerator="NSwagCSharp" Namespace="ApimAIAssistant.FacadeApp.Proxies" ClassName="AoaiFacadeClient" Link="OpenAPIs\swagger-apim-aoai.json" />
   </ItemGroup>
 
   <ItemGroup>
@@ -29,6 +29,10 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Assistant.Models.Examples\Assistant.Models.Examples.csproj" />
   </ItemGroup>
 
   <ItemGroup>

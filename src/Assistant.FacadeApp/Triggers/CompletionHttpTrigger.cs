@@ -2,6 +2,7 @@ using System.Net;
 
 using ApimAIAssistant.FacadeApp.Configurations;
 using ApimAIAssistant.FacadeApp.Proxies;
+using ApimAIAssistant.Models.Examples;
 
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
@@ -42,10 +43,10 @@ public class CompletionHttpTrigger
     /// <returns><see cref="HttpResponseData"/> instance.</returns>
     [Function(nameof(CompletionHttpTrigger.GetCompletionsAsync))]
     [OpenApiOperation(operationId: "getCompletions", tags: new[] { "completions" }, Summary = "Gets the completion from the OpenAI API", Description = "This gets the completion from the OpenAI API.", Visibility = OpenApiVisibilityType.Important)]
-    [OpenApiRequestBody(contentType: "text/plain", bodyType: typeof(string), Required = true, /* Example = typeof(PromptExample), */ Description = "The prompt to generate the completion.")]
-    [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "text/markdown", bodyType: typeof(string), /* Example = typeof(CompletionExample), */ Summary = "The completion generated from the OpenAI API.", Description = "This returns the completion generated from the OpenAI API.")]
-    [OpenApiResponseWithBody(statusCode: HttpStatusCode.BadRequest, contentType: "text/plain", bodyType: typeof(string), /* Example = typeof(BadRequestExample), */ Summary = "Invalid request.", Description = "This indicates the request is invalid.")]
-    [OpenApiResponseWithBody(statusCode: HttpStatusCode.InternalServerError, contentType: "text/plain", bodyType: typeof(string), /* Example = typeof(InternalServerErrorExample), */ Summary = "Internal server error.", Description = "This indicates the server is not working as expected.")]
+    [OpenApiRequestBody(contentType: "text/plain", bodyType: typeof(string), Required = true, Example = typeof(PromptExample), Description = "The prompt to generate the completion.")]
+    [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "text/plain", bodyType: typeof(string), Example = typeof(CompletionExample), Summary = "The completion generated from the OpenAI API.", Description = "This returns the completion generated from the OpenAI API.")]
+    [OpenApiResponseWithBody(statusCode: HttpStatusCode.BadRequest, contentType: "text/plain", bodyType: typeof(string), Example = typeof(BadRequestExample), Summary = "Invalid request.", Description = "This indicates the request is invalid.")]
+    [OpenApiResponseWithBody(statusCode: HttpStatusCode.InternalServerError, contentType: "text/plain", bodyType: typeof(string), Example = typeof(InternalServerErrorExample), Summary = "Internal server error.", Description = "This indicates the server is not working as expected.")]
     public async Task<HttpResponseData> GetCompletionsAsync([HttpTrigger(AuthorizationLevel.Anonymous, "POST", Route = "completions")] HttpRequestData req)
     {
         this._logger.LogInformation("C# HTTP trigger function processed a request.");
@@ -55,11 +56,10 @@ public class CompletionHttpTrigger
         try
         {
             var completion = await this._aoai
-                                       .GetCompletionsAsync(prompt, this._apimSettings.BaseUrl, this._apimSettings.SubscriptionKey)
-                                       .ConfigureAwait(false);
+                                       .GetCompletionsAsync(prompt, this._apimSettings.BaseUrl, this._apimSettings.SubscriptionKey);
 
             response = req.CreateResponse(HttpStatusCode.OK);
-            response.Headers.Add("Content-Type", "text/markdown; charset=utf-8; variant=GFM");
+            response.Headers.Add("Content-Type", "text/plain; charset=utf-8; variant=GFM");
 
             response.WriteString(completion);
         }

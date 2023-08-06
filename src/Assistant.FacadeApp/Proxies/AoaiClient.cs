@@ -20,14 +20,14 @@ public interface IAoaiClient
 /// <summary>
 /// This represents the proxy client entity to backend API for AOAI.
 /// </summary>
-public partial class AoaiClient : IAoaiClient
+public class AoaiClient : AoaiFacadeClient, IAoaiClient
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="AoaiClient"/> class.
     /// </summary>
     /// <param name="factory"><see cref="IHttpClientFactory"/> instance.</param>
     public AoaiClient(IHttpClientFactory factory)
-        : this(factory.ThrowIfNullOrDefault().CreateClient("aoai"))
+        : base(factory.ThrowIfNullOrDefault().CreateClient("aoai"))
     {
     }
 
@@ -35,8 +35,21 @@ public partial class AoaiClient : IAoaiClient
     public async Task<string> GetCompletionsAsync(string prompt, string baseUrl, string apiKey)
     {
         this.BaseUrl = baseUrl.ThrowIfNullOrWhiteSpace();
-        this._httpClient.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", apiKey.ThrowIfNullOrWhiteSpace());
+        this.HttpClient.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", apiKey.ThrowIfNullOrWhiteSpace());
 
         return await this.GetCompletionsAsync(prompt).ConfigureAwait(false);
+    }
+
+    /// <inheritdoc />
+    protected override async Task<ObjectResponseResult<T>> ReadObjectResponseAsync<T>(HttpResponseMessage response, IReadOnlyDictionary<string, IEnumerable<string>> headers, CancellationToken cancellationToken)
+    {
+        if (typeof(T) != typeof(string))
+        {
+            return await base.ReadObjectResponseAsync<T>(response, headers, cancellationToken).ConfigureAwait(false);
+        }
+
+        var responseText = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+        var responseObject = (T)Convert.ChangeType(responseText, typeof(T));
+        return new ObjectResponseResult<T>(responseObject, responseText);
     }
 }
