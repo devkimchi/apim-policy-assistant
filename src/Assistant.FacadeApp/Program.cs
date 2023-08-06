@@ -49,10 +49,10 @@ var host = new HostBuilder()
                     });
 
                     services.AddHttpClient("aoai");
-                    services.AddScoped<IAoaiClientWrapper, AoaiClientWrapper>(provider =>
+                    services.AddScoped<IAoaiProxyClientWrapper, AoaiProxyClientWrapper>(provider =>
                     {
                         var factory = provider.GetService<IHttpClientFactory>();
-                        var client = new AoaiClientWrapper(factory) { ReadResponseAsString = true };
+                        var client = new AoaiProxyClientWrapper(factory) { ReadResponseAsString = true };
 
                         return client;
                     });

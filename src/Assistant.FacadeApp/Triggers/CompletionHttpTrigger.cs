@@ -20,16 +20,16 @@ namespace ApimAIAssistant.FacadeApp.Triggers;
 public class CompletionHttpTrigger
 {
     private readonly ApimSettings _apimSettings;
-    private readonly IAoaiClientWrapper _aoai;
+    private readonly IAoaiProxyClientWrapper _aoai;
     private readonly ILogger _logger;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="CompletionHttpTrigger"/> class.
     /// </summary>
     /// <param name="apimSettings"><see cref="ApimSettings"/> instance.</param>
-    /// <param name="aoai"><see cref="IAoaiClientWrapper"/> instance.</param>
+    /// <param name="aoai"><see cref="IAoaiProxyClientWrapper"/> instance.</param>
     /// <param name="loggerFactory"><see cref="ILoggerFactory"/> instance.</param>
-    public CompletionHttpTrigger(ApimSettings apimSettings, IAoaiClientWrapper aoai, ILoggerFactory loggerFactory)
+    public CompletionHttpTrigger(ApimSettings apimSettings, IAoaiProxyClientWrapper aoai, ILoggerFactory loggerFactory)
     {
         this._apimSettings = apimSettings.ThrowIfNullOrDefault();
         this._aoai = aoai.ThrowIfNullOrDefault();
