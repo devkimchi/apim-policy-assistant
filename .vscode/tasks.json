@@ -12,7 +12,7 @@
 			"type": "process",
 			"problemMatcher": "$msCompile",
 			"options": {
-				"cwd": "${workspaceFolder}/src/Assistant.ApiApp"
+				"cwd": "${workspaceFolder}/src/${input:pickProject}"
 			}
 		},
 		{
@@ -31,7 +31,7 @@
 			},
 			"problemMatcher": "$msCompile",
 			"options": {
-				"cwd": "${workspaceFolder}/src/Assistant.ApiApp"
+				"cwd": "${workspaceFolder}/src/${input:pickProject}"
 			}
 		},
 		{
@@ -47,7 +47,7 @@
 			"type": "process",
 			"problemMatcher": "$msCompile",
 			"options": {
-				"cwd": "${workspaceFolder}/src/Assistant.ApiApp"
+				"cwd": "${workspaceFolder}/src/${input:pickProject}"
 			}
 		},
 		{
@@ -64,18 +64,29 @@
 			"dependsOn": "clean release (functions)",
 			"problemMatcher": "$msCompile",
 			"options": {
-				"cwd": "${workspaceFolder}/src/Assistant.ApiApp"
+				"cwd": "${workspaceFolder}/src/${input:pickProject}"
 			}
 		},
 		{
 			"type": "func",
 			"dependsOn": "build (functions)",
 			"options": {
-				"cwd": "${workspaceFolder}/src/Assistant.ApiApp/bin/Debug/net7.0"
+				"cwd": "${workspaceFolder}/src/${input:pickProject}/bin/Debug/net7.0"
 			},
 			"command": "host start",
 			"isBackground": true,
 			"problemMatcher": "$func-dotnet-watch"
 		}
-	]
+	],
+  "inputs": [
+    {
+      "id": "pickProject",
+      "type": "pickString",
+      "description": "Choose which project to start",
+      "options": [
+        "Assistant.ApiApp",
+        "Assistant.FacadeApp"
+      ]
+    }
+  ]
 }

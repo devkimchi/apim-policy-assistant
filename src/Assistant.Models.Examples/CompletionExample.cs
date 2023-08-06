@@ -3,7 +3,7 @@ using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Resolvers;
 
 using Newtonsoft.Json.Serialization;
 
-namespace ApimAIAssistant.ApiApp.Examples;
+namespace ApimAIAssistant.Models.Examples;
 
 /// <summary>
 /// This represents the example entity for completion.

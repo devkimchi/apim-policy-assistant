@@ -1,7 +1,7 @@
 using System.Net;
 
 using ApimAIAssistant.ApiApp.Configurations;
-using ApimAIAssistant.ApiApp.Examples;
+using ApimAIAssistant.Models.Examples;
 
 using Azure;
 using Azure.AI.OpenAI;

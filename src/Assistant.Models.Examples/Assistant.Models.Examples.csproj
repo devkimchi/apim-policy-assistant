@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+
+    <AssemblyName>ApimAIAssistant.Models.Examples</AssemblyName>
+    <RootNamespace>ApimAIAssistant.Models.Examples</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Azure.WebJobs.Extensions.OpenApi.Core" Version="1.5.1" />
+  </ItemGroup>
+
+</Project>

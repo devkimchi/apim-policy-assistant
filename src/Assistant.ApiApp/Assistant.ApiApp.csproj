@@ -20,6 +20,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Assistant.Models.Examples\Assistant.Models.Examples.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="host.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

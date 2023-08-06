@@ -4,6 +4,10 @@
     "AzureWebJobsStorage": "UseDevelopmentStorage=true",
     "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated",
 
+    "OpenApi__DocVersion": "1.0.0",
+    "OpenApi__DocTitle": "APIM Policy Assistant Facade API",
+    "OpenApi__DocDescription": "This is a set of facade API to provide AI assistant feature to generate APIM policies.",
+
     "Apim__BaseUrl": "https://apim-{{AZURE_ENV_NAME}}.azure-api.net/aoai",
     "Apim__SubscriptionKey": "{{APIM_SUBSCRIPTION_KEY}}",
 

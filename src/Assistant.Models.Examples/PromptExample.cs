@@ -3,19 +3,19 @@ using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Resolvers;
 
 using Newtonsoft.Json.Serialization;
 
-namespace ApimAIAssistant.ApiApp.Examples;
+namespace ApimAIAssistant.Models.Examples;
 
 /// <summary>
-/// This represents the example entity for `Internal Server Error`.
+/// This represents the example entity for prompt.
 /// </summary>
-public class InternalServerErrorExample : OpenApiExample<string>
+public class PromptExample : OpenApiExample<string>
 {
     /// <inheritdoc />
     public override IOpenApiExample<string> Build(NamingStrategy namingStrategy = null)
     {
-        var error = "Internal server error.";
+        var prompt = "Show me the APIM policy document in general.";
 
-        this.Examples.Add(OpenApiExampleResolver.Resolve("error", error, namingStrategy));
+        this.Examples.Add(OpenApiExampleResolver.Resolve("prompt", prompt, namingStrategy));
 
         return this;
     }

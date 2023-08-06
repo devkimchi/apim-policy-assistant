@@ -50,7 +50,6 @@
           "text/plain"
         ],
         "produces": [
-          "text/markdown",
           "text/plain"
         ],
         "responses": {
@@ -60,7 +59,7 @@
               "type": "string"
             },
             "examples": {
-              "text/markdown": "```xml\n<policies>\n  <inbound />\n  <backend>\n    <forward-request />\n  </backend>\n  <outbound />\n  <on-error />\n</policies>\n```"
+              "text/plain": "```xml\n<policies>\n  <inbound />\n  <backend>\n    <forward-request />\n  </backend>\n  <outbound />\n  <on-error />\n</policies>\n```"
             }
           },
           "400": {
