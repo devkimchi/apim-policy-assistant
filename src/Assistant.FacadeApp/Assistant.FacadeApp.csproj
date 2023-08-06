@@ -12,7 +12,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <OpenApiReference Include="..\..\infra\swagger-apim-aoai.json" CodeGenerator="NSwagCSharp" Namespace="ApimAIAssistant.FacadeApp.Proxies" ClassName="AoaiFacadeClient" Link="OpenAPIs\swagger-apim-aoai.json" />
+    <OpenApiReference Include="..\..\infra\swagger-apim-aoai.json" CodeGenerator="NSwagCSharp" Namespace="ApimAIAssistant.FacadeApp.Proxies" ClassName="AoaiProxyClient" Link="OpenAPIs\swagger-apim-aoai.json" />
   </ItemGroup>
 
   <ItemGroup>

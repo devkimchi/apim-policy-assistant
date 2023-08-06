@@ -3,7 +3,7 @@ namespace ApimAIAssistant.FacadeApp.Proxies;
 /// <summary>
 /// This represents the proxy client entity to backend API for AOAI.
 /// </summary>
-public partial class AoaiFacadeClient
+public partial class AoaiProxyClient
 {
     /// <summary>
     /// Gets the <see cref="System.Net.Http.HttpClient"/> instance.

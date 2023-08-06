@@ -5,7 +5,7 @@ namespace ApimAIAssistant.FacadeApp.Proxies;
 /// <summary>
 /// This provides interface to the <see cref="AoaiClient"/> class.
 /// </summary>
-public interface IAoaiClient
+public interface IAoaiClientWrapper
 {
     /// <summary>
     /// Gets the prompt completion.
@@ -20,13 +20,13 @@ public interface IAoaiClient
 /// <summary>
 /// This represents the proxy client entity to backend API for AOAI.
 /// </summary>
-public class AoaiClient : AoaiFacadeClient, IAoaiClient
+public class AoaiClientWrapper : AoaiProxyClient, IAoaiClientWrapper
 {
     /// <summary>
-    /// Initializes a new instance of the <see cref="AoaiClient"/> class.
+    /// Initializes a new instance of the <see cref="AoaiClientWrapper"/> class.
     /// </summary>
     /// <param name="factory"><see cref="IHttpClientFactory"/> instance.</param>
-    public AoaiClient(IHttpClientFactory factory)
+    public AoaiClientWrapper(IHttpClientFactory factory)
         : base(factory.ThrowIfNullOrDefault().CreateClient("aoai"))
     {
     }
