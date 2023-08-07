@@ -16,6 +16,7 @@
     "MSGraph__ClientSecret": "{{AZURE_AD_CLIENT_SECRET}}"
   },
   "Host": {
+    "LocalHttpPort": 7071,
     "CORS": "*"
   }
 }

@@ -2,7 +2,7 @@
   "profiles": {
     "Assistant.FacadeApp": {
       "commandName": "Project",
-      "commandLineArgs": "--port 7072",
+      "commandLineArgs": "--port 7071",
       "launchBrowser": false
     }
   }

@@ -3,9 +3,9 @@ using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Extensions;
 namespace ApimAIAssistant.FacadeApp.Proxies;
 
 /// <summary>
-/// This provides interface to the <see cref="AoaiClient"/> class.
+/// This provides interface to the <see cref="AoaiProxyClientWrapper"/> class.
 /// </summary>
-public interface IAoaiClient
+public interface IAoaiProxyClientWrapper
 {
     /// <summary>
     /// Gets the prompt completion.
@@ -20,13 +20,13 @@ public interface IAoaiClient
 /// <summary>
 /// This represents the proxy client entity to backend API for AOAI.
 /// </summary>
-public class AoaiClient : AoaiFacadeClient, IAoaiClient
+public class AoaiProxyClientWrapper : AoaiProxyClient, IAoaiProxyClientWrapper
 {
     /// <summary>
-    /// Initializes a new instance of the <see cref="AoaiClient"/> class.
+    /// Initializes a new instance of the <see cref="AoaiProxyClientWrapper"/> class.
     /// </summary>
     /// <param name="factory"><see cref="IHttpClientFactory"/> instance.</param>
-    public AoaiClient(IHttpClientFactory factory)
+    public AoaiProxyClientWrapper(IHttpClientFactory factory)
         : base(factory.ThrowIfNullOrDefault().CreateClient("aoai"))
     {
     }
