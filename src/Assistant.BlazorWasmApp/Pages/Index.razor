@@ -1,9 +1,46 @@
-﻿@page "/"
+@page "/"
+@inject FacadeClientWrapper Facade
 
-<PageTitle>Index</PageTitle>
+<PageTitle>APIM AI Assistant</PageTitle>
 
-<h1>Hello, world!</h1>
+<div class="container">
+    <div class="row">
+        <div class="mb-3">
+            <label for="prompt" class="form-label"><strong>Prompt</strong></label>
+            <textarea class="form-control" id="prompt" rows="10" placeholder="Add prompt here">@prompt</textarea>
+        </div>
+    </div>
 
-Welcome to your new app.
+    <div class="row">
+        <div class="mb-3">
+            <button type="button" class="btn btn-primary" @onclick="CompleteAsync">Complete!</button>
+            <button type="button" class="btn btn-secondary" @onclick="ClearAsync">Clear!</button>
+        </div>
+    </div>
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+    <div class="row">
+        <div class="mb-3">
+            <label for="prompt" class="form-label"><strong>Completion</strong></label>
+            <textarea class="form-control" id="prompt" rows="10" readonly>@completion</textarea>
+        </div>
+    </div>
+
+</div>
+
+@code {
+    private string? prompt = "Show me the APIM policy in general.";
+    private string? completion;
+
+    protected async Task CompleteAsync()
+    {
+        completion = await Facade.GetCompletionsAsync(prompt);
+    }
+
+    protected async Task ClearAsync()
+    {
+        prompt = default;
+        completion = default;
+
+        await Task.CompletedTask;
+    }
+}

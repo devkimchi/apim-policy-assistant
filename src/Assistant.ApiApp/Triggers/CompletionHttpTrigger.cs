@@ -48,7 +48,7 @@ public class CompletionHttpTrigger
     [OpenApiSecurity(schemeName: "function_key", schemeType: SecuritySchemeType.ApiKey, Name = "x-functions-key", In = OpenApiSecurityLocationType.Header)]
     [OpenApiRequestBody(contentType: "text/plain", bodyType: typeof(string), Required = true, Example = typeof(PromptExample), Description = "The prompt to generate the completion.")]
     [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "text/plain", bodyType: typeof(string), Example = typeof(CompletionExample), Summary = "The completion generated from the OpenAI API.", Description = "This returns the completion generated from the OpenAI API.")]
-    [OpenApiResponseWithBody(statusCode: HttpStatusCode.BadRequest, contentType: "text/plain", bodyType: typeof(string),  Example = typeof(BadRequestExample), Summary = "Invalid request.", Description = "This indicates the request is invalid.")]
+    [OpenApiResponseWithBody(statusCode: HttpStatusCode.BadRequest, contentType: "text/plain", bodyType: typeof(string), Example = typeof(BadRequestExample), Summary = "Invalid request.", Description = "This indicates the request is invalid.")]
     [OpenApiResponseWithBody(statusCode: HttpStatusCode.InternalServerError, contentType: "text/plain", bodyType: typeof(string), Example = typeof(InternalServerErrorExample), Summary = "Internal server error.", Description = "This indicates the server is not working as expected.")]
     public async Task<HttpResponseData> GetCompletionsAsync([HttpTrigger(AuthorizationLevel.Function, "POST", Route = "completions")] HttpRequestData req)
     {
@@ -77,12 +77,16 @@ public class CompletionHttpTrigger
             Messages =
                 {
                     new ChatMessage(ChatRole.System, this._promptSettings.System),
+
                     new ChatMessage(ChatRole.User, this._promptSettings.Users[0]),
-                    new ChatMessage(ChatRole.System, this._promptSettings.Assistants[0]),
+                    new ChatMessage(ChatRole.Assistant, this._promptSettings.Assistants[0]),
+
                     new ChatMessage(ChatRole.User, this._promptSettings.Users[1]),
-                    new ChatMessage(ChatRole.System, this._promptSettings.Assistants[1]),
+                    new ChatMessage(ChatRole.Assistant, this._promptSettings.Assistants[1]),
+
                     new ChatMessage(ChatRole.User, this._promptSettings.Users[2]),
-                    new ChatMessage(ChatRole.System, this._promptSettings.Assistants[2]),
+                    new ChatMessage(ChatRole.Assistant, this._promptSettings.Assistants[2]),
+
                     new ChatMessage(ChatRole.User, prompt)
                 },
             MaxTokens = 3000,
