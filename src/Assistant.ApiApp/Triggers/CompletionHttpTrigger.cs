@@ -79,13 +79,13 @@ public class CompletionHttpTrigger
                     new ChatMessage(ChatRole.System, this._promptSettings.System),
 
                     new ChatMessage(ChatRole.User, this._promptSettings.Users[0]),
-                    new ChatMessage(ChatRole.Assistant, this._promptSettings.Assistants[0]),
+                    new ChatMessage(ChatRole.System, this._promptSettings.Assistants[0]),
 
                     new ChatMessage(ChatRole.User, this._promptSettings.Users[1]),
-                    new ChatMessage(ChatRole.Assistant, this._promptSettings.Assistants[1]),
+                    new ChatMessage(ChatRole.System, this._promptSettings.Assistants[1]),
 
                     new ChatMessage(ChatRole.User, this._promptSettings.Users[2]),
-                    new ChatMessage(ChatRole.Assistant, this._promptSettings.Assistants[2]),
+                    new ChatMessage(ChatRole.System, this._promptSettings.Assistants[2]),
 
                     new ChatMessage(ChatRole.User, prompt)
                 },

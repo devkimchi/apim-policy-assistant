@@ -6,6 +6,23 @@
       "type": "coreclr",
       "request": "attach",
       "processId": "${command:azureFunctions.pickProcess}"
+    },
+    {
+      "name": "Launch Blazor WebAssembly App",
+      "type": "dotnet",
+      "request": "launch",
+      "projectPath": "${workspaceFolder}/src/Assistant.BlazorWasmApp/Assistant.BlazorWasmApp.csproj",
+      "launchConfigurationId": "TargetFramework=;https"
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Blazor & Facade",
+      "configurations": [
+        "Launch Blazor WebAssembly App",
+        "Attach to .NET Functions"
+      ],
+      "stopAll": true
     }
   ]
 }
