@@ -1,4 +1,5 @@
-using ApimAIAssistant.ApiApp.Configurations;
+using ApimAIAssistant.Services.OpenAI;
+using ApimAIAssistant.Services.OpenAI.Configurations;
 
 using Microsoft.Azure.Functions.Worker.Extensions.OpenApi.Extensions;
 using Microsoft.Azure.WebJobs.Extensions.OpenApi.Configurations.AppSettings.Extensions;
@@ -25,6 +26,8 @@ var host = new HostBuilder()
                             .GetService<IConfiguration>()
                             .Get<PromptSettings>(PromptSettings.Name);
                     services.AddSingleton(promptSettings);
+
+                    services.AddScoped<IOpenAIService, OpenAIService>();
 
                     services.AddSingleton<IOpenApiConfigurationOptions>(_ =>
                     {

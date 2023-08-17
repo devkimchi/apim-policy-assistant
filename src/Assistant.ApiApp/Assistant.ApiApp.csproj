@@ -12,7 +12,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Azure.AI.OpenAI" Version="1.0.0-beta.6" />
     <PackageReference Include="Microsoft.Azure.Functions.Worker" Version="1.18.0" />
     <PackageReference Include="Microsoft.Azure.Functions.Worker.Extensions.Http" Version="3.0.13" />
     <PackageReference Include="Microsoft.Azure.Functions.Worker.Extensions.OpenApi" Version="1.5.1" />
@@ -21,6 +20,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Assistant.Models.Examples\Assistant.Models.Examples.csproj" />
+    <ProjectReference Include="..\Assistant.Services.OpenAI\Assistant.Services.OpenAI.csproj" />
   </ItemGroup>
 
   <ItemGroup>

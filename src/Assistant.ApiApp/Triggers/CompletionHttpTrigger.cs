@@ -1,10 +1,7 @@
 using System.Net;
 
-using ApimAIAssistant.ApiApp.Configurations;
 using ApimAIAssistant.Models.Examples;
-
-using Azure;
-using Azure.AI.OpenAI;
+using ApimAIAssistant.Services.OpenAI;
 
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
@@ -21,20 +18,17 @@ namespace ApimAIAssistant.ApiApp.Triggers;
 /// </summary>
 public class CompletionHttpTrigger
 {
-    private readonly OpenAIApiSettings _openAISettings;
-    private readonly PromptSettings _promptSettings;
+    private readonly IOpenAIService _service;
     private readonly ILogger _logger;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="CompletionHttpTrigger"/> class.
     /// </summary>
-    /// <param name="openAISettings"><see cref="OpenAIApiSettings"/> instance.</param>
-    /// <param name="promptSettings"><see cref="PromptSettings"/> instance.</param>
+    /// <param name="service"><see cref="IOpenAIService"/> instance.</param>
     /// <param name="loggerFactory"><see cref="ILoggerFactory"/> instance.</param>
-    public CompletionHttpTrigger(OpenAIApiSettings openAISettings, PromptSettings promptSettings, ILoggerFactory loggerFactory)
+    public CompletionHttpTrigger(IOpenAIService service, ILoggerFactory loggerFactory)
     {
-        this._openAISettings = openAISettings.ThrowIfNullOrDefault();
-        this._promptSettings = promptSettings.ThrowIfNullOrDefault();
+        this._service = service.ThrowIfNullOrDefault();
         this._logger = loggerFactory.ThrowIfNullOrDefault().CreateLogger<CompletionHttpTrigger>();
     }
 
@@ -68,37 +62,9 @@ public class CompletionHttpTrigger
             return response;
         }
 
-        var endpoint = new Uri(this._openAISettings.Endpoint);
-        var credential = new AzureKeyCredential(this._openAISettings.AuthKey);
-        var client = new OpenAIClient(endpoint, credential);
-
-        var chatCompletionsOptions = new ChatCompletionsOptions()
-        {
-            Messages =
-                {
-                    new ChatMessage(ChatRole.System, this._promptSettings.System),
-
-                    new ChatMessage(ChatRole.User, this._promptSettings.Users[0]),
-                    new ChatMessage(ChatRole.System, this._promptSettings.Assistants[0]),
-
-                    new ChatMessage(ChatRole.User, this._promptSettings.Users[1]),
-                    new ChatMessage(ChatRole.System, this._promptSettings.Assistants[1]),
-
-                    new ChatMessage(ChatRole.User, this._promptSettings.Users[2]),
-                    new ChatMessage(ChatRole.System, this._promptSettings.Assistants[2]),
-
-                    new ChatMessage(ChatRole.User, prompt)
-                },
-            MaxTokens = 3000,
-            Temperature = 0.7f,
-        };
-
-        var deploymentId = this._openAISettings.DeploymentId;
-
         try
         {
-            var result = await client.GetChatCompletionsAsync(deploymentId, chatCompletionsOptions);
-            var message = result.Value.Choices[0].Message.Content;
+            var message = await this._service.GetCompletionsAsync(prompt);
 
             this._logger.LogInformation(message);
 

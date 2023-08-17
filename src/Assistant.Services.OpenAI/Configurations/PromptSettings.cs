@@ -1,4 +1,4 @@
-namespace ApimAIAssistant.ApiApp.Configurations;
+namespace ApimAIAssistant.Services.OpenAI.Configurations;
 
 /// <summary>
 /// This represents the settings entity for the prompt.
