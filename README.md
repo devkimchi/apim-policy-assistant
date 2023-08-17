@@ -14,6 +14,7 @@ It's your friendly assistant to generate [Azure API Management policy documents]
 - [Azure CLI](https://learn.microsoft.com/cli/azure/what-is-azure-cli)
 - [Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/overview)
 - [GitHub CLI](https://cli.github.com)
+- [Azure Static Web Apps CLI](https://github.com/Azure/static-web-apps-cli)
 
 ## Getting Started
 
@@ -59,4 +60,50 @@ It's your friendly assistant to generate [Azure API Management policy documents]
 
    ```bash
    azd down
+   ```
+
+## Local Development
+
+### `local.settings.json` - `Assistant.ApiApp`
+
+1. copy `local.settings.sample.json` to `local.settings.json`
+1. Substitute the following values in the `local.settings.json` with the actual values:
+
+   ```json
+   "OpenAIApi__Endpoint": "https://aoai-{{AZURE_ENV_NAME}}.openai.azure.com/",
+   "OpenAIApi__AuthKey": "{{AOAI_API_KEY}}",
+   "OpenAIApi__DeploymentId": "{{DEPLOYMENT_ID}}",
+   ```
+
+   - `{{AZURE_ENV_NAME}}`: Azure environment name. It looks like `assistant****` where `****` is a random number.
+   - `{{AOAI_API_KEY}}`: API Key of Azure OpenAI Service.
+   - `{{DEPLOYMENT_ID}}`: Azure OpenAI Service deployment ID. It looks like `model-gpt35turbo16k`.
+
+### `local.settings.json` - `Assistant.FacadeApp`
+
+1. copy `local.settings.sample.json` to `local.settings.json`
+1. Substitute the following values in the `local.settings.json` with the actual values:
+
+   ```json
+   "Apim__BaseUrl": "https://apim-{{AZURE_ENV_NAME}}.azure-api.net/aoai",
+   "Apim__SubscriptionKey": "{{APIM_SUBSCRIPTION_KEY}}",
+   ```
+
+   - `{{AZURE_ENV_NAME}}`: Azure environment name. It looks like `assistant****` where `****` is a random number.
+   - `{{APIM_SUBSCRIPTION_KEY}}`: Subscription Key of Azure API Management.
+
+### Visual Studio
+
+TBD
+
+### Visual Studio Code
+
+TBD
+
+1. Run debug mode by pressing `F5` key.
+1. Choose `Assistant.FacadeApp`.
+1. Run the commands below:
+
+   ```bash
+   swa start --api-devserver-url http://localhost:7071
    ```

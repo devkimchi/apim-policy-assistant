@@ -1,7 +1,7 @@
 {
   "dotnet.defaultSolution": "ApimPolicyAssistant.sln",
-  "azureFunctions.projectSubpath": "src/Assistant.ApiApp",
-  "azureFunctions.deploySubpath": "src/Assistant.ApiApp/bin/Release/net7.0/publish",
+  "azureFunctions.projectSubpath": "src/Assistant.FacadeApp",
+  "azureFunctions.deploySubpath": "src/Assistant.FacadeApp/bin/Release/net7.0/publish",
   "azureFunctions.projectLanguage": "C#",
   "azureFunctions.projectRuntime": "~4",
   "debug.internalConsoleOptions": "neverOpen",

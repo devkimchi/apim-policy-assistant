@@ -22,7 +22,7 @@
     "Prompt__Assistants__2": "```xml\n<policies>\n  <inbound>\n    <rewrite-uri template=\"/products?id={id}\" copy-unmatched-params=\"true\" />\n    <set-backend-service base-url=\"https://fabrikam.com/api\" />\n  </inbound>\n  <backend>\n    <base />\n  </backend>\n  <outbound>\n    <base />\n  </outbound>\n  <on-error>\n    <base />\n  </on-error>\n</policies>\n```"
   },
   "Host": {
-    "LocalHttpPort": 7071,
+    "LocalHttpPort": 7072,
     "CORS": "*"
   }
 }
