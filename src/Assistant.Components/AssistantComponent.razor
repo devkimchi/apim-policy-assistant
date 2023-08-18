@@ -1,0 +1,24 @@
+<div class="container">
+
+    <div class="row">
+        <div class="mb-3">
+            <label for="prompt" class="form-label"><strong>Prompt</strong></label>
+            <textarea class="form-control" id="prompt" rows="10" placeholder="Add prompt here">@Prompt</textarea>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="mb-3">
+            <button type="button" class="btn btn-primary" @onclick="CompleteAsync">Complete!</button>
+            <button type="button" class="btn btn-secondary" @onclick="ClearAsync">Clear!</button>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="mb-3">
+            <label for="prompt" class="form-label"><strong>Completion</strong></label>
+            <textarea class="form-control" id="prompt" rows="10" readonly>@Completion</textarea>
+        </div>
+    </div>
+
+</div>

@@ -1,46 +1,5 @@
 @page "/"
-@inject SwaFacadeClientWrapper Facade
 
-<PageTitle>APIM AI Assistant</PageTitle>
+<PageTitle>APIM Policy Assistant</PageTitle>
 
-<div class="container">
-    <div class="row">
-        <div class="mb-3">
-            <label for="prompt" class="form-label"><strong>Prompt</strong></label>
-            <textarea class="form-control" id="prompt" rows="10" placeholder="Add prompt here">@prompt</textarea>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="mb-3">
-            <button type="button" class="btn btn-primary" @onclick="CompleteAsync">Complete!</button>
-            <button type="button" class="btn btn-secondary" @onclick="ClearAsync">Clear!</button>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="mb-3">
-            <label for="prompt" class="form-label"><strong>Completion</strong></label>
-            <textarea class="form-control" id="prompt" rows="10" readonly>@completion</textarea>
-        </div>
-    </div>
-
-</div>
-
-@code {
-    private string? prompt = "Show me the APIM policy in general.";
-    private string? completion;
-
-    protected async Task CompleteAsync()
-    {
-        completion = await Facade.GetCompletionsAsync(prompt);
-    }
-
-    protected async Task ClearAsync()
-    {
-        prompt = default;
-        completion = default;
-
-        await Task.CompletedTask;
-    }
-}
+<AssistantComponent />

@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Assistant.Facades.SwaFacade\Assistant.Facades.SwaFacade.csproj" />
+    <ProjectReference Include="..\Assistant.Components\Assistant.Components.csproj" />
   </ItemGroup>
 
 </Project>
