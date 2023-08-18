@@ -1,24 +1,11 @@
-namespace ApimPolicyAssistant.Services.AssistantProxy;
+using ApimPolicyAssistant.Services.Abstractions;
 
-/// <summary>
-/// This provides interface to the <see cref="AssistantProxyClientWrapper"/> class.
-/// </summary>
-public interface IAssistantProxyClientWrapper
-{
-    /// <summary>
-    /// Gets the prompt completion.
-    /// </summary>
-    /// <param name="prompt">Prompt value.</param>
-    /// <param name="baseUrl">Base URL value.</param>
-    /// <param name="apiKey">API key value.</param>
-    /// <returns>Returns the prompt completion.</returns>
-    Task<string> GetCompletionsAsync(string prompt, string baseUrl, string apiKey);
-}
+namespace ApimPolicyAssistant.Services.AssistantProxy;
 
 /// <summary>
 /// This represents the proxy client entity to backend API for AOAI.
 /// </summary>
-public class AssistantProxyClientWrapper : AssistantProxyClient, IAssistantProxyClientWrapper
+public class AssistantProxyClientWrapper : AssistantProxyClient, IOpenApiClient
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="AssistantProxyClientWrapper"/> class.
@@ -30,16 +17,11 @@ public class AssistantProxyClientWrapper : AssistantProxyClient, IAssistantProxy
     }
 
     /// <inheritdoc />
-    public async Task<string> GetCompletionsAsync(string prompt, string baseUrl, string apiKey)
+    public IOpenApiClient SetApiKey(string apiKey)
     {
-        if (string.IsNullOrWhiteSpace(prompt))
-        {
-            throw new ArgumentNullException(nameof(prompt));
-        }
-        this.BaseUrl = baseUrl ?? throw new ArgumentNullException(nameof(baseUrl));
         this.HttpClient.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", apiKey ?? throw new ArgumentNullException(nameof(apiKey)));
 
-        return await this.GetCompletionsAsync(prompt).ConfigureAwait(false);
+        return this;
     }
 
     /// <inheritdoc />

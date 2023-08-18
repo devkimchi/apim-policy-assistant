@@ -1,7 +1,7 @@
 using System.Net;
 
 using ApimPolicyAssistant.Models.Examples;
-using ApimPolicyAssistant.Services.AssistantProxy;
+using ApimPolicyAssistant.Services.Abstractions;
 using ApimPolicyAssistant.Services.AssistantProxy.Configurations;
 
 using Microsoft.Azure.Functions.Worker;
@@ -20,7 +20,7 @@ namespace ApimPolicyAssistant.ApiApp.SwaFacade.Triggers;
 public class CompletionHttpTrigger
 {
     private readonly ApimSettings _apimSettings;
-    private readonly IAssistantProxyClientWrapper _assistant;
+    private readonly IOpenApiClient _assistant;
     private readonly ILogger _logger;
 
     /// <summary>
@@ -29,7 +29,7 @@ public class CompletionHttpTrigger
     /// <param name="apimSettings"><see cref="ApimSettings"/> instance.</param>
     /// <param name="assistant"><see cref="IAssistantProxyClientWrapper"/> instance.</param>
     /// <param name="loggerFactory"><see cref="ILoggerFactory"/> instance.</param>
-    public CompletionHttpTrigger(ApimSettings apimSettings, IAssistantProxyClientWrapper assistant, ILoggerFactory loggerFactory)
+    public CompletionHttpTrigger(ApimSettings apimSettings, IOpenApiClient assistant, ILoggerFactory loggerFactory)
     {
         this._apimSettings = apimSettings.ThrowIfNullOrDefault();
         this._assistant = assistant.ThrowIfNullOrDefault();
@@ -56,7 +56,7 @@ public class CompletionHttpTrigger
         try
         {
             var completion = await this._assistant
-                                       .GetCompletionsAsync(prompt, this._apimSettings.BaseUrl, this._apimSettings.SubscriptionKey);
+                                       .GetCompletionsAsync(prompt);
 
             response = req.CreateResponse(HttpStatusCode.OK);
             response.Headers.Add("Content-Type", "text/plain; charset=utf-8");
