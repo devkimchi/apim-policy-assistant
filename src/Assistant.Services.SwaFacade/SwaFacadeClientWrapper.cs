@@ -1,9 +1,11 @@
+using ApimPolicyAssistant.Services.Abstractions;
+
 namespace ApimPolicyAssistant.Services.SwaFacade;
 
 /// <summary>
 /// This represents the proxy client entity to backend API for AOAI.
 /// </summary>
-public class SwaFacadeClientWrapper : SwaFacadeClient
+public class SwaFacadeClientWrapper : SwaFacadeClient, IOpenApiClient
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="SwaFacadeClientWrapper"/> class.
@@ -13,6 +15,10 @@ public class SwaFacadeClientWrapper : SwaFacadeClient
         : base(httpClient)
     {
     }
+
+    /// <inheritdoc />
+    public IOpenApiClient SetApiKey(string apiKey)
+        => this;
 
     /// <inheritdoc />
     protected override async Task<ObjectResponseResult<T>> ReadObjectResponseAsync<T>(HttpResponseMessage response, IReadOnlyDictionary<string, IEnumerable<string>> headers, CancellationToken cancellationToken)

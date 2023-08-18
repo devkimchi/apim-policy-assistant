@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Assistant.Services.SwaFacade\Assistant.Services.SwaFacade.csproj" />
+    <ProjectReference Include="..\Assistant.Services.OpenApiClient\Assistant.Services.OpenApiClient.csproj" />
   </ItemGroup>
 
 </Project>

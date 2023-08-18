@@ -8,7 +8,7 @@ public partial class AssistantProxyClient
     /// <summary>
     /// Gets the <see cref="System.Net.Http.HttpClient"/> instance.
     /// </summary>
-    public virtual HttpClient HttpClient
+    protected virtual HttpClient HttpClient
     {
         get
         {

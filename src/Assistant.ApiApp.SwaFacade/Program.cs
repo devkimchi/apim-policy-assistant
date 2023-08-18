@@ -1,4 +1,5 @@
 using ApimPolicyAssistant.ApiApp.SwaFacade.Configurations;
+using ApimPolicyAssistant.Services.Abstractions;
 using ApimPolicyAssistant.Services.AssistantProxy;
 using ApimPolicyAssistant.Services.AssistantProxy.Configurations;
 
@@ -49,8 +50,17 @@ var host = new HostBuilder()
                         return options;
                     });
 
-                    services.AddHttpClient<IAssistantProxyClientWrapper, AssistantProxyClientWrapper>(httpClient
-                        => new AssistantProxyClientWrapper(httpClient) { ReadResponseAsString = true });
+                    services.AddHttpClient<IOpenApiClient, AssistantProxyClientWrapper>(httpClient =>
+                    {
+                        var wrapper = new AssistantProxyClientWrapper(httpClient)
+                        {
+                            BaseUrl = apimSettings.BaseUrl,
+                            ReadResponseAsString = true
+                        };
+                        wrapper.SetApiKey(apimSettings.SubscriptionKey);
+
+                        return wrapper;
+                    });
                 })
                 .Build();
 
