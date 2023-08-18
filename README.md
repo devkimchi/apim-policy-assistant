@@ -59,7 +59,7 @@ It's your friendly assistant to generate [Azure API Management policy documents]
 1. To avoid unexpected billing shock, run the commands below to deprovision Azure resources:
 
    ```bash
-   azd down
+   azd down --force --purge --no-prompt
    ```
 
 ## Local Development
@@ -79,7 +79,7 @@ It's your friendly assistant to generate [Azure API Management policy documents]
    - `{{AOAI_API_KEY}}`: API Key of Azure OpenAI Service.
    - `{{DEPLOYMENT_ID}}`: Azure OpenAI Service deployment ID. It looks like `model-gpt35turbo16k`.
 
-### `local.settings.json` - `Assistant.FacadeApp`
+### `local.settings.json` - `Assistant.ApiApp.SwaFacade`
 
 1. copy `local.settings.sample.json` to `local.settings.json`
 1. Substitute the following values in the `local.settings.json` with the actual values:
@@ -94,16 +94,12 @@ It's your friendly assistant to generate [Azure API Management policy documents]
 
 ### Visual Studio
 
-TBD
+1. Open Visual Studio with `ApimPolicyAssistantWindows.sln`.
+1. Make user that you have multiple applications set as startup projects.
+1. Run debug mode by pressing `F5` key.
 
 ### Visual Studio Code
 
-TBD
-
+1. Make sure that the Debug mode is set to `Blazor & Facade`.
 1. Run debug mode by pressing `F5` key.
-1. Choose `Assistant.FacadeApp`.
-1. Run the commands below:
-
-   ```bash
-   swa start --api-devserver-url http://localhost:7071
-   ```
+1. Choose `Assistant.ApiApp.SwaFacade`.
