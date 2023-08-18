@@ -1,5 +1,5 @@
-using ApimAIAssistant.Services.OpenAI;
-using ApimAIAssistant.Services.OpenAI.Configurations;
+using ApimPolicyAssistant.Services.OpenAI;
+using ApimPolicyAssistant.Services.OpenAI.Configurations;
 
 using Microsoft.Azure.Functions.Worker.Extensions.OpenApi.Extensions;
 using Microsoft.Azure.WebJobs.Extensions.OpenApi.Configurations.AppSettings.Extensions;

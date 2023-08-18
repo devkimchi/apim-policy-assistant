@@ -1,4 +1,4 @@
-namespace ApimAIAssistant.Proxies.AssistantProxy;
+namespace ApimPolicyAssistant.Services.AssistantProxy;
 
 /// <summary>
 /// This represents the proxy client entity to backend API for AOAI.

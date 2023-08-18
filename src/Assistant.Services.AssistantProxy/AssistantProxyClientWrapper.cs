@@ -1,4 +1,4 @@
-namespace ApimAIAssistant.Proxies.AssistantProxy;
+namespace ApimPolicyAssistant.Services.AssistantProxy;
 
 /// <summary>
 /// This provides interface to the <see cref="AssistantProxyClientWrapper"/> class.

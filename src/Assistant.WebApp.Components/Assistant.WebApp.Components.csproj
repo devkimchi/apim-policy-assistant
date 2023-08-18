@@ -5,8 +5,8 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
 
-    <AssemblyName>ApimAIAssistant.Components</AssemblyName>
-    <RootNamespace>ApimAIAssistant.Components</RootNamespace>
+    <AssemblyName>ApimPolicyAssistant.WebApp.Components</AssemblyName>
+    <RootNamespace>ApimPolicyAssistant.WebApp.Components</RootNamespace>
   </PropertyGroup>
 
 
@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Assistant.Facades.SwaFacade\Assistant.Facades.SwaFacade.csproj" />
+    <ProjectReference Include="..\Assistant.Services.SwaFacade\Assistant.Services.SwaFacade.csproj" />
   </ItemGroup>
 
 </Project>

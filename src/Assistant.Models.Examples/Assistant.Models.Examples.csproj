@@ -6,8 +6,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
 
-    <AssemblyName>ApimAIAssistant.Models.Examples</AssemblyName>
-    <RootNamespace>ApimAIAssistant.Models.Examples</RootNamespace>
+    <AssemblyName>ApimPolicyAssistant.Models.Examples</AssemblyName>
+    <RootNamespace>ApimPolicyAssistant.Models.Examples</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

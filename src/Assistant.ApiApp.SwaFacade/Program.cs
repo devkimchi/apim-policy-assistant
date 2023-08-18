@@ -1,6 +1,6 @@
-using ApimAIAssistant.FacadeApp.Configurations;
-using ApimAIAssistant.Proxies.AssistantProxy;
-using ApimAIAssistant.Proxies.AssistantProxy.Configurations;
+using ApimPolicyAssistant.ApiApp.SwaFacade.Configurations;
+using ApimPolicyAssistant.Services.AssistantProxy;
+using ApimPolicyAssistant.Services.AssistantProxy.Configurations;
 
 using Microsoft.Azure.Functions.Worker.Extensions.OpenApi.Extensions;
 using Microsoft.Azure.WebJobs.Extensions.OpenApi.Configurations.AppSettings.Extensions;

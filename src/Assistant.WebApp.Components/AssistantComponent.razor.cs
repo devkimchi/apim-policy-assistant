@@ -1,8 +1,8 @@
-using ApimAIAssistant.Facades.SwaFacade;
+using ApimPolicyAssistant.Services.SwaFacade;
 
 using Microsoft.AspNetCore.Components;
 
-namespace ApimAIAssistant.Components;
+namespace ApimPolicyAssistant.WebApp.Components;
 
 public partial class AssistantComponent : ComponentBase
 {

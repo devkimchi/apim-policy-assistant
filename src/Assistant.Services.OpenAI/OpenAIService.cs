@@ -1,9 +1,9 @@
-using ApimAIAssistant.Services.OpenAI.Configurations;
+using ApimPolicyAssistant.Services.OpenAI.Configurations;
 
 using Azure;
 using Azure.AI.OpenAI;
 
-namespace ApimAIAssistant.Services.OpenAI;
+namespace ApimPolicyAssistant.Services.OpenAI;
 
 public interface IOpenAIService
 {

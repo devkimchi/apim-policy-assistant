@@ -1,8 +1,8 @@
 using System.Net;
 
-using ApimAIAssistant.Models.Examples;
-using ApimAIAssistant.Proxies.AssistantProxy;
-using ApimAIAssistant.Proxies.AssistantProxy.Configurations;
+using ApimPolicyAssistant.Models.Examples;
+using ApimPolicyAssistant.Services.AssistantProxy;
+using ApimPolicyAssistant.Services.AssistantProxy.Configurations;
 
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
@@ -12,7 +12,7 @@ using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Extensions;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 
-namespace ApimAIAssistant.FacadeApp.Triggers;
+namespace ApimPolicyAssistant.ApiApp.SwaFacade.Triggers;
 
 /// <summary>
 /// This represents the HTTP trigger facade entity for ChatGPT completion.

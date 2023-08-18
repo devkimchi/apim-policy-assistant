@@ -85,7 +85,7 @@
       "description": "Choose which project to start",
       "options": [
         "Assistant.ApiApp",
-        "Assistant.FacadeApp"
+        "Assistant.ApiApp.SwaFacade"
       ]
     }
   ]

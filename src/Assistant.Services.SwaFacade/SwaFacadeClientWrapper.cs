@@ -1,4 +1,4 @@
-namespace ApimAIAssistant.Facades.SwaFacade;
+namespace ApimPolicyAssistant.Services.SwaFacade;
 
 /// <summary>
 /// This represents the proxy client entity to backend API for AOAI.

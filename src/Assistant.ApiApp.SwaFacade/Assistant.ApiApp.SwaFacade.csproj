@@ -7,8 +7,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
 
-    <AssemblyName>ApimAIAssistant.FacadeApp</AssemblyName>
-    <RootNamespace>ApimAIAssistant.FacadeApp</RootNamespace>
+    <AssemblyName>ApimPolicyAssistant.ApiApp.SwaFacade</AssemblyName>
+    <RootNamespace>ApimPolicyAssistant.ApiApp.SwaFacade</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -20,7 +20,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Assistant.Models.Examples\Assistant.Models.Examples.csproj" />
-    <ProjectReference Include="..\Assistant.Proxies.AssistantProxy\Assistant.Proxies.AssistantProxy.csproj" />
+    <ProjectReference Include="..\Assistant.Services.AssistantProxy\Assistant.Services.AssistantProxy.csproj" />
   </ItemGroup>
 
   <ItemGroup>

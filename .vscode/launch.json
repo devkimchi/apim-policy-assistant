@@ -11,7 +11,7 @@
       "name": "Launch Blazor WebAssembly App",
       "type": "dotnet",
       "request": "launch",
-      "projectPath": "${workspaceFolder}/src/Assistant.BlazorWasmApp/Assistant.BlazorWasmApp.csproj",
+      "projectPath": "${workspaceFolder}/src/Assistant.WebApp.BlazorWasm/Assistant.WebApp.BlazorWasm.csproj",
       "launchConfigurationId": "TargetFramework=;https"
     }
   ],

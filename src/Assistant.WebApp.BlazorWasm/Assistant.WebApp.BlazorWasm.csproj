@@ -5,8 +5,8 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
 
-    <AssemblyName>ApimAIAssistant.BlazorWasmApp</AssemblyName>
-    <RootNamespace>ApimAIAssistant.BlazorWasmApp</RootNamespace>
+    <AssemblyName>ApimPolicyAssistant.WebApp.BlazorWasm</AssemblyName>
+    <RootNamespace>ApimPolicyAssistant.WebApp.BlazorWasm</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Assistant.Components\Assistant.Components.csproj" />
+    <ProjectReference Include="..\Assistant.WebApp.Components\Assistant.WebApp.Components.csproj" />
   </ItemGroup>
 
 </Project>

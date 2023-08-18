@@ -1,7 +1,7 @@
 using System.Net;
 
-using ApimAIAssistant.Models.Examples;
-using ApimAIAssistant.Services.OpenAI;
+using ApimPolicyAssistant.Models.Examples;
+using ApimPolicyAssistant.Services.OpenAI;
 
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
@@ -11,7 +11,7 @@ using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Extensions;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 
-namespace ApimAIAssistant.ApiApp.Triggers;
+namespace ApimPolicyAssistant.ApiApp.Triggers;
 
 /// <summary>
 /// This represents the HTTP trigger entity for ChatGPT completion.

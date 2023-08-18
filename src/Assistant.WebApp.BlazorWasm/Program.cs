@@ -1,5 +1,5 @@
-using ApimAIAssistant.BlazorWasmApp;
-using ApimAIAssistant.Facades.SwaFacade;
+using ApimPolicyAssistant.Services.SwaFacade;
+using ApimPolicyAssistant.WebApp.BlazorWasm;
 
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;

@@ -1,4 +1,4 @@
-namespace ApimAIAssistant.Proxies.AssistantProxy.Configurations;
+namespace ApimPolicyAssistant.Services.AssistantProxy.Configurations;
 
 /// <summary>
 /// This represents the settings entity for APIM.

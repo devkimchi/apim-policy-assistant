@@ -1,4 +1,4 @@
-﻿namespace ApimAIAssistant.FacadeApp.Configurations;
+﻿namespace ApimPolicyAssistant.ApiApp.SwaFacade.Configurations;
 
 /// <summary>
 /// This represents the settings entity for Microsoft Graph.
