@@ -6,12 +6,20 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
 
-    <AssemblyName>ApimAIAssistant.Proxies.AssistantProxy</AssemblyName>
-    <RootNamespace>ApimAIAssistant.Proxies.AssistantProxy</RootNamespace>
+    <AssemblyName>ApimAIAssistant.Facades.SwaFacade</AssemblyName>
+    <RootNamespace>ApimAIAssistant.Facades.SwaFacade</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
-    <OpenApiReference Include="..\..\infra\swagger-apim-aoai.json" CodeGenerator="NSwagCSharp" Namespace="ApimAIAssistant.Proxies.AssistantProxy" ClassName="AssistantProxyClient" Link="OpenAPIs\swagger-apim-aoai.json" />
+    <Compile Remove="OpenAPIs\**" />
+    <EmbeddedResource Remove="OpenAPIs\**" />
+    <None Remove="OpenAPIs\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <OpenApiReference Include="OpenAPIs\v3.yaml" CodeGenerator="NSwagCSharp" Namespace="ApimAIAssistant.Facades.SwaFacade" ClassName="SwaFacadeClient">
+      <SourceUri>http://localhost:7071/api/openapi/v3.yaml</SourceUri>
+    </OpenApiReference>
   </ItemGroup>
 
   <ItemGroup>

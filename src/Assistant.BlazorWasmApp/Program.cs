@@ -1,5 +1,5 @@
 using ApimAIAssistant.BlazorWasmApp;
-using ApimAIAssistant.BlazorWasmApp.Facades;
+using ApimAIAssistant.Facades.SwaFacade;
 
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
@@ -12,7 +12,7 @@ builder.Services.AddScoped(sp => new HttpClient() { BaseAddress = new Uri(builde
 builder.Services.AddScoped(sp =>
 {
     var http = sp.GetService<HttpClient>();
-    var facade = new FacadeClientWrapper(http) { ReadResponseAsString = true };
+    var facade = new SwaFacadeClientWrapper(http) { ReadResponseAsString = true };
     if (!builder.HostEnvironment.IsDevelopment())
     {
         var baseUrl = $"{builder.HostEnvironment.BaseAddress.TrimEnd('/')}/api";

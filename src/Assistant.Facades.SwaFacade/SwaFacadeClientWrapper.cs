@@ -1,15 +1,15 @@
-namespace ApimAIAssistant.BlazorWasmApp.Facades;
+namespace ApimAIAssistant.Facades.SwaFacade;
 
 /// <summary>
 /// This represents the proxy client entity to backend API for AOAI.
 /// </summary>
-public class FacadeClientWrapper : FacadeClient
+public class SwaFacadeClientWrapper : SwaFacadeClient
 {
     /// <summary>
-    /// Initializes a new instance of the <see cref="FacadeClientWrapper"/> class.
+    /// Initializes a new instance of the <see cref="SwaFacadeClientWrapper"/> class.
     /// </summary>
     /// <param name="httpClient"><see cref="HttpClient"/> instance.</param>
-    public FacadeClientWrapper(HttpClient httpClient)
+    public SwaFacadeClientWrapper(HttpClient httpClient)
         : base(httpClient)
     {
     }

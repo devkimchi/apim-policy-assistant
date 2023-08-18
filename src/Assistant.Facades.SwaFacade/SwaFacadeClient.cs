@@ -1,9 +1,9 @@
-namespace ApimAIAssistant.BlazorWasmApp.Facades;
+namespace ApimAIAssistant.Facades.SwaFacade;
 
 /// <summary>
 /// This represents the facade client entity to backend API.
 /// </summary>
-public partial class FacadeClient
+public partial class SwaFacadeClient
 {
     /// <summary>
     /// Gets the <see cref="System.Net.Http.HttpClient"/> instance.
