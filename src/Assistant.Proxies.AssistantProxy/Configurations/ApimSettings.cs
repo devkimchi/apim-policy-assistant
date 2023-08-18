@@ -1,4 +1,4 @@
-namespace ApimAIAssistant.FacadeApp.Configurations;
+namespace ApimAIAssistant.Proxies.AssistantProxy.Configurations;
 
 /// <summary>
 /// This represents the settings entity for APIM.

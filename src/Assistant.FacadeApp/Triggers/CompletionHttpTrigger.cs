@@ -1,8 +1,8 @@
 using System.Net;
 
-using ApimAIAssistant.FacadeApp.Configurations;
-using ApimAIAssistant.FacadeApp.Proxies;
 using ApimAIAssistant.Models.Examples;
+using ApimAIAssistant.Proxies.AssistantProxy;
+using ApimAIAssistant.Proxies.AssistantProxy.Configurations;
 
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
@@ -20,19 +20,19 @@ namespace ApimAIAssistant.FacadeApp.Triggers;
 public class CompletionHttpTrigger
 {
     private readonly ApimSettings _apimSettings;
-    private readonly IAoaiProxyClientWrapper _aoai;
+    private readonly IAssistantProxyClientWrapper _assistant;
     private readonly ILogger _logger;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="CompletionHttpTrigger"/> class.
     /// </summary>
     /// <param name="apimSettings"><see cref="ApimSettings"/> instance.</param>
-    /// <param name="aoai"><see cref="IAoaiProxyClientWrapper"/> instance.</param>
+    /// <param name="assistant"><see cref="IAssistantProxyClientWrapper"/> instance.</param>
     /// <param name="loggerFactory"><see cref="ILoggerFactory"/> instance.</param>
-    public CompletionHttpTrigger(ApimSettings apimSettings, IAoaiProxyClientWrapper aoai, ILoggerFactory loggerFactory)
+    public CompletionHttpTrigger(ApimSettings apimSettings, IAssistantProxyClientWrapper assistant, ILoggerFactory loggerFactory)
     {
         this._apimSettings = apimSettings.ThrowIfNullOrDefault();
-        this._aoai = aoai.ThrowIfNullOrDefault();
+        this._assistant = assistant.ThrowIfNullOrDefault();
         this._logger = loggerFactory.ThrowIfNullOrDefault().CreateLogger<CompletionHttpTrigger>();
     }
 
@@ -55,7 +55,7 @@ public class CompletionHttpTrigger
         var prompt = req.ReadAsString();
         try
         {
-            var completion = await this._aoai
+            var completion = await this._assistant
                                        .GetCompletionsAsync(prompt, this._apimSettings.BaseUrl, this._apimSettings.SubscriptionKey);
 
             response = req.CreateResponse(HttpStatusCode.OK);

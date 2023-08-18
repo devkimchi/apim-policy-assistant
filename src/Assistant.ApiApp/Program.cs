@@ -27,8 +27,6 @@ var host = new HostBuilder()
                             .Get<PromptSettings>(PromptSettings.Name);
                     services.AddSingleton(promptSettings);
 
-                    services.AddScoped<IOpenAIService, OpenAIService>();
-
                     services.AddSingleton<IOpenApiConfigurationOptions>(_ =>
                     {
                         var options = new OpenApiConfigurationOptions()
@@ -49,6 +47,8 @@ var host = new HostBuilder()
 
                         return options;
                     });
+
+                    services.AddScoped<IOpenAIService, OpenAIService>();
                 })
                 .Build();
 

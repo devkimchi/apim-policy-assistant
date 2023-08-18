@@ -1,5 +1,6 @@
 using ApimAIAssistant.FacadeApp.Configurations;
-using ApimAIAssistant.FacadeApp.Proxies;
+using ApimAIAssistant.Proxies.AssistantProxy;
+using ApimAIAssistant.Proxies.AssistantProxy.Configurations;
 
 using Microsoft.Azure.Functions.Worker.Extensions.OpenApi.Extensions;
 using Microsoft.Azure.WebJobs.Extensions.OpenApi.Configurations.AppSettings.Extensions;
@@ -48,14 +49,8 @@ var host = new HostBuilder()
                         return options;
                     });
 
-                    services.AddHttpClient("aoai");
-                    services.AddScoped<IAoaiProxyClientWrapper, AoaiProxyClientWrapper>(provider =>
-                    {
-                        var factory = provider.GetService<IHttpClientFactory>();
-                        var client = new AoaiProxyClientWrapper(factory) { ReadResponseAsString = true };
-
-                        return client;
-                    });
+                    services.AddHttpClient<IAssistantProxyClientWrapper, AssistantProxyClientWrapper>(httpClient
+                        => new AssistantProxyClientWrapper(httpClient) { ReadResponseAsString = true });
                 })
                 .Build();
 

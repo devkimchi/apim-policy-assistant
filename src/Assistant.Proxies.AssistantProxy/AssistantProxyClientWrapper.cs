@@ -1,11 +1,9 @@
-using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Extensions;
-
-namespace ApimAIAssistant.FacadeApp.Proxies;
+namespace ApimAIAssistant.Proxies.AssistantProxy;
 
 /// <summary>
-/// This provides interface to the <see cref="AoaiProxyClientWrapper"/> class.
+/// This provides interface to the <see cref="AssistantProxyClientWrapper"/> class.
 /// </summary>
-public interface IAoaiProxyClientWrapper
+public interface IAssistantProxyClientWrapper
 {
     /// <summary>
     /// Gets the prompt completion.
@@ -20,22 +18,26 @@ public interface IAoaiProxyClientWrapper
 /// <summary>
 /// This represents the proxy client entity to backend API for AOAI.
 /// </summary>
-public class AoaiProxyClientWrapper : AoaiProxyClient, IAoaiProxyClientWrapper
+public class AssistantProxyClientWrapper : AssistantProxyClient, IAssistantProxyClientWrapper
 {
     /// <summary>
-    /// Initializes a new instance of the <see cref="AoaiProxyClientWrapper"/> class.
+    /// Initializes a new instance of the <see cref="AssistantProxyClientWrapper"/> class.
     /// </summary>
-    /// <param name="factory"><see cref="IHttpClientFactory"/> instance.</param>
-    public AoaiProxyClientWrapper(IHttpClientFactory factory)
-        : base(factory.ThrowIfNullOrDefault().CreateClient("aoai"))
+    /// <param name="httpClient"><see cref="HttpClient"/> instance.</param>
+    public AssistantProxyClientWrapper(HttpClient httpClient)
+        : base(httpClient)
     {
     }
 
     /// <inheritdoc />
     public async Task<string> GetCompletionsAsync(string prompt, string baseUrl, string apiKey)
     {
-        this.BaseUrl = baseUrl.ThrowIfNullOrWhiteSpace();
-        this.HttpClient.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", apiKey.ThrowIfNullOrWhiteSpace());
+        if (string.IsNullOrWhiteSpace(prompt))
+        {
+            throw new ArgumentNullException(nameof(prompt));
+        }
+        this.BaseUrl = baseUrl ?? throw new ArgumentNullException(nameof(baseUrl));
+        this.HttpClient.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", apiKey ?? throw new ArgumentNullException(nameof(apiKey)));
 
         return await this.GetCompletionsAsync(prompt).ConfigureAwait(false);
     }
