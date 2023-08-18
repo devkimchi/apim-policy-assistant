@@ -1,9 +1,19 @@
 {
   "dotnet.defaultSolution": "ApimPolicyAssistant.sln",
-  "azureFunctions.projectSubpath": "src/Assistant.ApiApp",
-  "azureFunctions.deploySubpath": "src/Assistant.ApiApp/bin/Release/net7.0/publish",
+
+  // ⬇️⬇️⬇️ Uncomment the following two lines if you want to debug the API app. ⬇️⬇️⬇️
+  // "azureFunctions.deploySubpath": "src/Assistant.ApiApp/bin/Release/net7.0/publish",
+  // "azureFunctions.projectSubpath": "src/Assistant.ApiApp",
+  // ⬆️⬆️⬆️ Uncomment the above two lines if you want to debug API app. ⬆️⬆️⬆️
+
+  // ⬇️⬇️⬇️ Uncomment the following two lines if you want to debug the facade API app. ⬇️⬇️⬇️
+  "azureFunctions.deploySubpath": "src/Assistant.ApiApp.SwaFacade/bin/Release/net7.0/publish",
+  "azureFunctions.projectSubpath": "src/Assistant.ApiApp.SwaFacade",
+  // ⬆️⬆️⬆️ Uncomment the above two lines if you want to debug API app. ⬆️⬆️⬆️
+
   "azureFunctions.projectLanguage": "C#",
   "azureFunctions.projectRuntime": "~4",
-  "debug.internalConsoleOptions": "neverOpen",
-  "azureFunctions.preDeployTask": "publish (functions)"
+  "azureFunctions.preDeployTask": "publish (functions)",
+
+  "debug.internalConsoleOptions": "neverOpen"
 }

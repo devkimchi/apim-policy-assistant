@@ -1,12 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
 
-    <AssemblyName>ApimAIAssistant.Models.Examples</AssemblyName>
-    <RootNamespace>ApimAIAssistant.Models.Examples</RootNamespace>
+    <AssemblyName>ApimPolicyAssistant.Models.Examples</AssemblyName>
+    <RootNamespace>ApimPolicyAssistant.Models.Examples</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

@@ -14,6 +14,7 @@ It's your friendly assistant to generate [Azure API Management policy documents]
 - [Azure CLI](https://learn.microsoft.com/cli/azure/what-is-azure-cli)
 - [Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/overview)
 - [GitHub CLI](https://cli.github.com)
+- [Azure Static Web Apps CLI](https://github.com/Azure/static-web-apps-cli)
 
 ## Getting Started
 
@@ -58,5 +59,47 @@ It's your friendly assistant to generate [Azure API Management policy documents]
 1. To avoid unexpected billing shock, run the commands below to deprovision Azure resources:
 
    ```bash
-   azd down
+   azd down --force --purge --no-prompt
    ```
+
+## Local Development
+
+### `local.settings.json` - `Assistant.ApiApp`
+
+1. copy `local.settings.sample.json` to `local.settings.json`
+1. Substitute the following values in the `local.settings.json` with the actual values:
+
+   ```json
+   "OpenAIApi__Endpoint": "https://aoai-{{AZURE_ENV_NAME}}.openai.azure.com/",
+   "OpenAIApi__AuthKey": "{{AOAI_API_KEY}}",
+   "OpenAIApi__DeploymentId": "{{DEPLOYMENT_ID}}",
+   ```
+
+   - `{{AZURE_ENV_NAME}}`: Azure environment name. It looks like `assistant****` where `****` is a random number.
+   - `{{AOAI_API_KEY}}`: API Key of Azure OpenAI Service.
+   - `{{DEPLOYMENT_ID}}`: Azure OpenAI Service deployment ID. It looks like `model-gpt35turbo16k`.
+
+### `local.settings.json` - `Assistant.ApiApp.SwaFacade`
+
+1. copy `local.settings.sample.json` to `local.settings.json`
+1. Substitute the following values in the `local.settings.json` with the actual values:
+
+   ```json
+   "Apim__BaseUrl": "https://apim-{{AZURE_ENV_NAME}}.azure-api.net/aoai",
+   "Apim__SubscriptionKey": "{{APIM_SUBSCRIPTION_KEY}}",
+   ```
+
+   - `{{AZURE_ENV_NAME}}`: Azure environment name. It looks like `assistant****` where `****` is a random number.
+   - `{{APIM_SUBSCRIPTION_KEY}}`: Subscription Key of Azure API Management.
+
+### Visual Studio
+
+1. Open Visual Studio with `ApimPolicyAssistantWindows.sln`.
+1. Make user that you have multiple applications set as startup projects.
+1. Run debug mode by pressing `F5` key.
+
+### Visual Studio Code
+
+1. Make sure that the Debug mode is set to `Blazor & Facade`.
+1. Run debug mode by pressing `F5` key.
+1. Choose `Assistant.ApiApp.SwaFacade`.

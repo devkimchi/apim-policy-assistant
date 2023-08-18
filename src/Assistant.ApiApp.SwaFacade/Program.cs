@@ -1,5 +1,6 @@
-using ApimPolicyAssistant.Services.OpenAI;
-using ApimPolicyAssistant.Services.OpenAI.Configurations;
+using ApimPolicyAssistant.ApiApp.SwaFacade.Configurations;
+using ApimPolicyAssistant.Services.AssistantProxy;
+using ApimPolicyAssistant.Services.AssistantProxy.Configurations;
 
 using Microsoft.Azure.Functions.Worker.Extensions.OpenApi.Extensions;
 using Microsoft.Azure.WebJobs.Extensions.OpenApi.Configurations.AppSettings.Extensions;
@@ -17,15 +18,15 @@ var host = new HostBuilder()
                 .ConfigureHostConfiguration(config => config.AddEnvironmentVariables())
                 .ConfigureServices(services =>
                 {
-                    var openAIApiSettings = services.BuildServiceProvider()
+                    var apimSettings = services.BuildServiceProvider()
                             .GetService<IConfiguration>()
-                            .Get<OpenAIApiSettings>(OpenAIApiSettings.Name);
-                    services.AddSingleton(openAIApiSettings);
+                            .Get<ApimSettings>(ApimSettings.Name);
+                    services.AddSingleton(apimSettings);
 
-                    var promptSettings = services.BuildServiceProvider()
+                    var graphSettings = services.BuildServiceProvider()
                             .GetService<IConfiguration>()
-                            .Get<PromptSettings>(PromptSettings.Name);
-                    services.AddSingleton(promptSettings);
+                            .Get<MSGraphSettings>(MSGraphSettings.Name);
+                    services.AddSingleton(graphSettings);
 
                     services.AddSingleton<IOpenApiConfigurationOptions>(_ =>
                     {
@@ -48,7 +49,8 @@ var host = new HostBuilder()
                         return options;
                     });
 
-                    services.AddScoped<IOpenAIService, OpenAIService>();
+                    services.AddHttpClient<IAssistantProxyClientWrapper, AssistantProxyClientWrapper>(httpClient
+                        => new AssistantProxyClientWrapper(httpClient) { ReadResponseAsString = true });
                 })
                 .Build();
 
