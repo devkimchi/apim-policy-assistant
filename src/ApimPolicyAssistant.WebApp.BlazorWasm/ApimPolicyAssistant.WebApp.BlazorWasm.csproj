@@ -15,8 +15,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Assistant.Services.SwaFacade\Assistant.Services.SwaFacade.csproj" />
-    <ProjectReference Include="..\Assistant.WebApp.Components\Assistant.WebApp.Components.csproj" />
+    <ProjectReference Include="..\ApimPolicyAssistant.Services.SwaFacade\ApimPolicyAssistant.Services.SwaFacade.csproj" />
+    <ProjectReference Include="..\ApimPolicyAssistant.WebApp.Components\ApimPolicyAssistant.WebApp.Components.csproj" />
   </ItemGroup>
 
 </Project>

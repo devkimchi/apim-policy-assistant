@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "Assistant.ApiApp": {
+    "ApimPolicyAssistant.ApiApp": {
       "commandName": "Project",
       "commandLineArgs": "--port 7072",
       "launchBrowser": false

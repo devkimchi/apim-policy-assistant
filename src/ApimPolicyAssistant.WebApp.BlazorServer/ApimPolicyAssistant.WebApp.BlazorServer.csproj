@@ -10,8 +10,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Assistant.Services.AssistantProxy\Assistant.Services.AssistantProxy.csproj" />
-    <ProjectReference Include="..\Assistant.WebApp.Components\Assistant.WebApp.Components.csproj" />
+    <ProjectReference Include="..\ApimPolicyAssistant.Services.AssistantProxy\ApimPolicyAssistant.Services.AssistantProxy.csproj" />
+    <ProjectReference Include="..\ApimPolicyAssistant.WebApp.Components\ApimPolicyAssistant.WebApp.Components.csproj" />
   </ItemGroup>
 
 </Project>

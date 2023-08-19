@@ -84,8 +84,8 @@
       "type": "pickString",
       "description": "Choose which project to start",
       "options": [
-        "Assistant.ApiApp",
-        "Assistant.ApiApp.SwaFacade"
+        "ApimPolicyAssistant.ApiApp",
+        "ApimPolicyAssistant.ApiApp.SwaFacade"
       ]
     }
   ]

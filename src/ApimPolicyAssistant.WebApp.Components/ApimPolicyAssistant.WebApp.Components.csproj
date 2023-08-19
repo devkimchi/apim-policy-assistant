@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Assistant.Services.OpenApiClient\Assistant.Services.OpenApiClient.csproj" />
+    <ProjectReference Include="..\ApimPolicyAssistant.Services.OpenApiClient\ApimPolicyAssistant.Services.OpenApiClient.csproj" />
   </ItemGroup>
 
 </Project>
