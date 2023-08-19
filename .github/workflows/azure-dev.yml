@@ -54,7 +54,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: apiapp
-        path: src/Assistant.ApiApp/bin/Release/net7.0/publish
+        path: src/ApimPolicyAssistant.ApiApp/bin/Release/net7.0/publish
 
   deploy:
     name: Deploy

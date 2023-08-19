@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+
+    <AssemblyName>ApimPolicyAssistant.WebApp.BlazorWasm</AssemblyName>
+    <RootNamespace>ApimPolicyAssistant.WebApp.BlazorWasm</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="7.0.9" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="7.0.9" PrivateAssets="all" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ApimPolicyAssistant.Services.SwaFacade\ApimPolicyAssistant.Services.SwaFacade.csproj" />
+    <ProjectReference Include="..\ApimPolicyAssistant.WebApp.Components\ApimPolicyAssistant.WebApp.Components.csproj" />
+  </ItemGroup>
+
+</Project>
