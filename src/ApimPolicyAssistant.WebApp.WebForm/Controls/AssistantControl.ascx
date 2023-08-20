@@ -19,7 +19,7 @@
     <div class="row">
         <div class="mb-3">
             <label for="Completion" class="form-label"><strong>Completion</strong></label>
-            <asp:TextBox CssClass="form-control" ID="Completion" TextMode="MultiLine" runat="server" Rows="10" placeholder="Result will show here" ReadOnly="true" />
+            <asp:TextBox CssClass="form-control" ID="Completion" TextMode="MultiLine" runat="server" Rows="10" placeholder="Result will show here" ReadOnly="true" Enabled="false" />
         </div>
     </div>
 

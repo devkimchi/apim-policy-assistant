@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+
 using ApimPolicyAssistant.Services.Abstractions;
 
 namespace ApimPolicyAssistant.WebApp.WebForm.Controls
@@ -13,12 +14,12 @@ namespace ApimPolicyAssistant.WebApp.WebForm.Controls
             this.Prompt.Text = "Show me the APIM policy in general.";
         }
 
-        protected async Task Complete_Click(object sender, EventArgs e)
+        protected async void Complete_Click(object sender, EventArgs e)
         {
             this.Completion.Text = await Api.GetCompletionsAsync(this.Prompt.Text);
         }
 
-        protected async Task Clear_Click(object sender, EventArgs e)
+        protected async void Clear_Click(object sender, EventArgs e)
         {
             this.Prompt.Text = default;
             this.Completion.Text = default;

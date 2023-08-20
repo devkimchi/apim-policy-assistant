@@ -1,4 +1,4 @@
-﻿/* Wrapping element */
+/* Wrapping element */
 /* Set some basic padding to keep content from hitting the edges */
 .body-content {
     margin-top: 15px;
@@ -10,7 +10,7 @@
 input,
 select,
 textarea {
-    max-width: 280px;
+    /*max-width: 280px;*/
 }
 
 /* Responsive: Portrait tablets and up */

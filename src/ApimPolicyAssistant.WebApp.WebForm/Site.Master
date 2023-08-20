@@ -37,6 +37,12 @@
             </Scripts>
         </asp:ScriptManager>
 
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
+            <div class="container">
+                <a class="navbar-brand" runat="server" href="~/">APIM Policy Assistant</a>
+            </div>
+        </nav>
+
         <div class="container body-content">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
