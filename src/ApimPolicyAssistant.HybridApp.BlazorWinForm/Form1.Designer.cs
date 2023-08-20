@@ -47,7 +47,7 @@ partial class Form1
         this.ClientSize = new Size(800, 450);
         this.Controls.Add(this.blazorWebView1);
         this.Name = "Form1";
-        this.Text = "Blazor Hybrid - WinForm";
+        this.Text = "APIM Policy Assistant";
         this.ResumeLayout(false);
     }
 
