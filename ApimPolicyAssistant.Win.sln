@@ -17,6 +17,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApimPolicyAssistant.WebApp.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApimPolicyAssistant.HybridApp.BlazorMaui", "src\ApimPolicyAssistant.HybridApp.BlazorMaui\ApimPolicyAssistant.HybridApp.BlazorMaui.csproj", "{73860C9C-C6CC-44D8-BF75-E27210424B2D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApimPolicyAssistant.HybridApp.BlazorWinForm", "src\ApimPolicyAssistant.HybridApp.BlazorWinForm\ApimPolicyAssistant.HybridApp.BlazorWinForm.csproj", "{2889FD88-2DD3-489A-8F15-8A6DBC79F6F6}"
+EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApimPolicyAssistant.Models.Examples", "src\ApimPolicyAssistant.Models.Examples\ApimPolicyAssistant.Models.Examples.csproj", "{A5C01B1D-263A-4AC2-B673-D13DD632A3A3}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApimPolicyAssistant.Services.OpenApiClient", "src\ApimPolicyAssistant.Services.OpenApiClient\ApimPolicyAssistant.Services.OpenApiClient.csproj", "{EDD1F457-ACFD-4A72-936A-EA424142B90D}"
@@ -26,8 +28,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApimPolicyAssistant.Services.SwaFacade", "src\ApimPolicyAssistant.Services.SwaFacade\ApimPolicyAssistant.Services.SwaFacade.csproj", "{B7149442-5129-476C-8B4E-44753F635881}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApimPolicyAssistant.Services.OpenAI", "src\ApimPolicyAssistant.Services.OpenAI\ApimPolicyAssistant.Services.OpenAI.csproj", "{163E7D36-8F9C-437D-8F14-3CA462539E11}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApimPolicyAssistant.HybridApp.BlazorWinForm", "src\ApimPolicyAssistant.HybridApp.BlazorWinForm\ApimPolicyAssistant.HybridApp.BlazorWinForm.csproj", "{2889FD88-2DD3-489A-8F15-8A6DBC79F6F6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -61,6 +61,10 @@ Global
 		{73860C9C-C6CC-44D8-BF75-E27210424B2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{73860C9C-C6CC-44D8-BF75-E27210424B2D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{73860C9C-C6CC-44D8-BF75-E27210424B2D}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{2889FD88-2DD3-489A-8F15-8A6DBC79F6F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2889FD88-2DD3-489A-8F15-8A6DBC79F6F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2889FD88-2DD3-489A-8F15-8A6DBC79F6F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2889FD88-2DD3-489A-8F15-8A6DBC79F6F6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A5C01B1D-263A-4AC2-B673-D13DD632A3A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A5C01B1D-263A-4AC2-B673-D13DD632A3A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A5C01B1D-263A-4AC2-B673-D13DD632A3A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -81,10 +85,6 @@ Global
 		{163E7D36-8F9C-437D-8F14-3CA462539E11}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{163E7D36-8F9C-437D-8F14-3CA462539E11}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{163E7D36-8F9C-437D-8F14-3CA462539E11}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2889FD88-2DD3-489A-8F15-8A6DBC79F6F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2889FD88-2DD3-489A-8F15-8A6DBC79F6F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2889FD88-2DD3-489A-8F15-8A6DBC79F6F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2889FD88-2DD3-489A-8F15-8A6DBC79F6F6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -96,12 +96,12 @@ Global
 		{B717D707-6366-4163-9A60-74B26A3A7E7A} = {9F06FCB0-34D9-418A-B80A-74FFDF8D4210}
 		{64BC01D5-0CEC-4B88-931B-AF9120C70CFF} = {9F06FCB0-34D9-418A-B80A-74FFDF8D4210}
 		{73860C9C-C6CC-44D8-BF75-E27210424B2D} = {9F06FCB0-34D9-418A-B80A-74FFDF8D4210}
+		{2889FD88-2DD3-489A-8F15-8A6DBC79F6F6} = {9F06FCB0-34D9-418A-B80A-74FFDF8D4210}
 		{A5C01B1D-263A-4AC2-B673-D13DD632A3A3} = {9F06FCB0-34D9-418A-B80A-74FFDF8D4210}
 		{EDD1F457-ACFD-4A72-936A-EA424142B90D} = {9F06FCB0-34D9-418A-B80A-74FFDF8D4210}
 		{9B16E592-EDAC-45E9-AA5C-40E78FE92D2A} = {9F06FCB0-34D9-418A-B80A-74FFDF8D4210}
 		{B7149442-5129-476C-8B4E-44753F635881} = {9F06FCB0-34D9-418A-B80A-74FFDF8D4210}
 		{163E7D36-8F9C-437D-8F14-3CA462539E11} = {9F06FCB0-34D9-418A-B80A-74FFDF8D4210}
-		{2889FD88-2DD3-489A-8F15-8A6DBC79F6F6} = {9F06FCB0-34D9-418A-B80A-74FFDF8D4210}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {04CBD62A-2966-489E-B26B-95385739494C}
