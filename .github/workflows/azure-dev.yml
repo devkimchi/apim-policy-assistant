@@ -30,25 +30,30 @@ jobs:
       with:
         dotnet-version: 7.x
 
+    - name: Install workload for Android
+      shell: bash
+      run: |
+        dotnet workload install maui-android
+
     - name: Restore NuGet packages
       shell: bash
       run: |
-        dotnet restore
+        dotnet restore ApimPolicyAssistant.sln
 
     - name: Build solution
       shell: bash
       run: |
-        dotnet build -c Release
+        dotnet build ApimPolicyAssistant.sln -c Release
 
     - name: Test solution
       shell: bash
       run: |
-        dotnet test -c Release
+        dotnet test ApimPolicyAssistant.sln -c Release
 
     - name: Create artifact
       shell: bash
       run: |
-        dotnet publish -c Release
+        dotnet publish ApimPolicyAssistant.sln -c Release
 
     - name: Upload artifact
       uses: actions/upload-artifact@v2
