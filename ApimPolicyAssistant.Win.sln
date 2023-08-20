@@ -19,7 +19,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApimPolicyAssistant.HybridA
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApimPolicyAssistant.HybridApp.BlazorWinForm", "src\ApimPolicyAssistant.HybridApp.BlazorWinForm\ApimPolicyAssistant.HybridApp.BlazorWinForm.csproj", "{2889FD88-2DD3-489A-8F15-8A6DBC79F6F6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApimPolicyAssistant.HybridApp.BlazorWpf", "src\ApimPolicyAssistant.HybridApp.BlazorWpf\ApimPolicyAssistant.HybridApp.BlazorWpf.csproj", "{BA586859-7CB9-4BBE-AD87-7B3C2A3F1178}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApimPolicyAssistant.HybridApp.BlazorWpf", "src\ApimPolicyAssistant.HybridApp.BlazorWpf\ApimPolicyAssistant.HybridApp.BlazorWpf.csproj", "{BA586859-7CB9-4BBE-AD87-7B3C2A3F1178}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApimPolicyAssistant.Models.Examples", "src\ApimPolicyAssistant.Models.Examples\ApimPolicyAssistant.Models.Examples.csproj", "{A5C01B1D-263A-4AC2-B673-D13DD632A3A3}"
 EndProject
@@ -30,6 +30,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApimPolicyAssistant.Services.SwaFacade", "src\ApimPolicyAssistant.Services.SwaFacade\ApimPolicyAssistant.Services.SwaFacade.csproj", "{B7149442-5129-476C-8B4E-44753F635881}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApimPolicyAssistant.Services.OpenAI", "src\ApimPolicyAssistant.Services.OpenAI\ApimPolicyAssistant.Services.OpenAI.csproj", "{163E7D36-8F9C-437D-8F14-3CA462539E11}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApimPolicyAssistant.WebApp.WebForm", "src\ApimPolicyAssistant.WebApp.WebForm\ApimPolicyAssistant.WebApp.WebForm.csproj", "{2620AD44-8272-47DD-918F-4BFB1296B958}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -91,6 +93,10 @@ Global
 		{163E7D36-8F9C-437D-8F14-3CA462539E11}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{163E7D36-8F9C-437D-8F14-3CA462539E11}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{163E7D36-8F9C-437D-8F14-3CA462539E11}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2620AD44-8272-47DD-918F-4BFB1296B958}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2620AD44-8272-47DD-918F-4BFB1296B958}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2620AD44-8272-47DD-918F-4BFB1296B958}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2620AD44-8272-47DD-918F-4BFB1296B958}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -109,6 +115,7 @@ Global
 		{9B16E592-EDAC-45E9-AA5C-40E78FE92D2A} = {9F06FCB0-34D9-418A-B80A-74FFDF8D4210}
 		{B7149442-5129-476C-8B4E-44753F635881} = {9F06FCB0-34D9-418A-B80A-74FFDF8D4210}
 		{163E7D36-8F9C-437D-8F14-3CA462539E11} = {9F06FCB0-34D9-418A-B80A-74FFDF8D4210}
+		{2620AD44-8272-47DD-918F-4BFB1296B958} = {9F06FCB0-34D9-418A-B80A-74FFDF8D4210}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {04CBD62A-2966-489E-B26B-95385739494C}
