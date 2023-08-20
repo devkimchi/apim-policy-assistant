@@ -4,17 +4,17 @@
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net7.0-windows</TargetFramework>
-    <UseWindowsForms>true</UseWindowsForms>
+    <UseWPF>true</UseWPF>
 
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
 
-    <AssemblyName>ApimPolicyAssistant.HybridApp.BlazorWinForm</AssemblyName>
-    <RootNamespace>ApimPolicyAssistant.HybridApp.BlazorWinForm</RootNamespace>
+    <AssemblyName>ApimPolicyAssistant.HybridApp.BlazorWpf</AssemblyName>
+    <RootNamespace>ApimPolicyAssistant.HybridApp.BlazorWpf</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebView.WindowsForms" Version="7.0.92" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebView.Wpf" Version="7.0.92" />
   </ItemGroup>
 
   <ItemGroup>
