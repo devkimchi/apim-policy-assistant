@@ -73,6 +73,11 @@ jobs:
     #   run: |
     #     dotnet publish src/ApimPolicyAssistant.HybridApp.BlazorWinForm -c Release -f net7.0-windows
 
+    # - name: Create artifacts - Wpf
+    #   shell: bash
+    #   run: |
+    #     dotnet publish src/ApimPolicyAssistant.HybridApp.BlazorWpf -c Release -f net7.0-windows
+
     - name: Upload artifact
       uses: actions/upload-artifact@v2
       with:
