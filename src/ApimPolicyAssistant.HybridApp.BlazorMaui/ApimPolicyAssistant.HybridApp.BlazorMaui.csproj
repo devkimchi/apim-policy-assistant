@@ -2,7 +2,8 @@
 
   <PropertyGroup>
     <TargetFrameworks>net7.0-android</TargetFrameworks>
-    <!-- <TargetFrameworks>net7.0-android;net7.0-ios;net7.0-maccatalyst</TargetFrameworks> -->
+    <!-- Uncomment to build an app on MacOS. Make sure that XCode is installed on your build machine -->
+    <!-- <TargetFrameworks>$(TargetFrameworks);net7.0-ios;net7.0-maccatalyst</TargetFrameworks> -->
     <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net7.0-windows10.0.19041.0</TargetFrameworks>
     <!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
     <!-- <TargetFrameworks>$(TargetFrameworks);net7.0-tizen</TargetFrameworks> -->
@@ -55,21 +56,21 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="appsettings.Development.json" Condition="$(Configuration) == 'Debug'">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="appsettings.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\ApimPolicyAssistant.Services.AssistantProxy\ApimPolicyAssistant.Services.AssistantProxy.csproj" />
     <ProjectReference Include="..\ApimPolicyAssistant.WebApp.Components\ApimPolicyAssistant.WebApp.Components.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="appsettings.Development.json" Condition="$(Configuration) == 'Debug'">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>
