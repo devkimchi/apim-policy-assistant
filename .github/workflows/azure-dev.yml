@@ -48,12 +48,30 @@ jobs:
     - name: Test solution
       shell: bash
       run: |
-        dotnet test ApimPolicyAssistant.sln -c Release
+        dotnet test ApimPolicyAssistant.sln -c Release --no-build
 
-    - name: Create artifact
+    - name: Create artifacts - Web
       shell: bash
       run: |
-        dotnet publish ApimPolicyAssistant.sln -c Release
+        dotnet publish src/ApimPolicyAssistant.ApiApp -c Release --no-build
+        dotnet publish src/ApimPolicyAssistant.ApiApp.SwaFacade -c Release --no-build
+        dotnet publish src/ApimPolicyAssistant.WebApp.BlazorServer -c Release --no-build
+        dotnet publish src/ApimPolicyAssistant.WebApp.BlazorWasm -c Release --no-build
+
+    - name: Create artifacts - MAUI (Android)
+      shell: bash
+      run: |
+        dotnet publish src/ApimPolicyAssistant.HybridApp.BlazorMaui -c Release -f net7.0-android
+
+    # - name: Create artifacts - MAUI (UWP)
+    #   shell: bash
+    #   run: |
+    #     dotnet publish src/ApimPolicyAssistant.HybridApp.BlazorMaui -c Release -f net7.0-windows
+
+    # - name: Create artifacts - WinForm
+    #   shell: bash
+    #   run: |
+    #     dotnet publish src/ApimPolicyAssistant.HybridApp.BlazorWinForm -c Release -f net7.0-windows
 
     - name: Upload artifact
       uses: actions/upload-artifact@v2
