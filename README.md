@@ -2,11 +2,6 @@
 
 It's your friendly assistant to generate [Azure API Management policy documents](https://learn.microsoft.com/azure/api-management/api-management-howto-policies), using [Azure OpenAI Service](https://learn.microsoft.com/azure/ai-services/openai/overview).
 
-## Acknowledgements
-
-- This repository currently contains [bicep files](https://learn.microsoft.com/azure/azure-resource-manager/bicep/overview) only for [Azure API Management](https://learn.microsoft.com/azure/api-management/api-management-key-concepts) and [Azure OpenAI Service](https://learn.microsoft.com/azure/ai-services/openai/overview) instances.
-- The assistant application is on the way.
-
 ## Prerequisites
 
 - [Azure Subscription](https://azure.microsoft.com/free)
@@ -64,9 +59,12 @@ It's your friendly assistant to generate [Azure API Management policy documents]
 
 ## Local Development
 
-### `local.settings.json` - `Assistant.ApiApp`
+- On Windows, use `ApimPolicyAssistant.Win.sln` to open the solution that contains WebForm, WinForm and WPF apps.
+- On other platforms, use `ApimPolicyAssistant.sln`.
 
-1. copy `local.settings.sample.json` to `local.settings.json`
+### `local.settings.json` - `ApimPolicyAssistant.ApiApp`
+
+1. Copy `local.settings.sample.json` to `local.settings.json`.
 1. Substitute the following values in the `local.settings.json` with the actual values:
 
    ```json
@@ -79,9 +77,9 @@ It's your friendly assistant to generate [Azure API Management policy documents]
    - `{{AOAI_API_KEY}}`: API Key of Azure OpenAI Service.
    - `{{DEPLOYMENT_ID}}`: Azure OpenAI Service deployment ID. It looks like `model-gpt35turbo16k`.
 
-### `local.settings.json` - `Assistant.ApiApp.SwaFacade`
+### `local.settings.json` - `ApimPolicyAssistant.ApiApp.SwaFacade`
 
-1. copy `local.settings.sample.json` to `local.settings.json`
+1. Copy `local.settings.sample.json` to `local.settings.json`.
 1. Substitute the following values in the `local.settings.json` with the actual values:
 
    ```json
@@ -92,14 +90,82 @@ It's your friendly assistant to generate [Azure API Management policy documents]
    - `{{AZURE_ENV_NAME}}`: Azure environment name. It looks like `assistant****` where `****` is a random number.
    - `{{APIM_SUBSCRIPTION_KEY}}`: Subscription Key of Azure API Management.
 
-### Visual Studio
+### `appsettings.Development.json` - `ApimPolicyAssistant.WebApp.WebForm`
 
-1. Open Visual Studio with `ApimPolicyAssistantWindows.sln`.
-1. Make user that you have multiple applications set as startup projects.
-1. Run debug mode by pressing `F5` key.
+1. Copy `appsettings.json` to `appsettings.Development.json`.
+1. Substitute the following sections with the actual values:
 
-### Visual Studio Code
+   ```json
+   "Apim": {
+     "BaseUrl": "https://apim-{{AZURE_ENV_NAME}}.azure-api.net/aoai",
+     "SubscriptionKey": "{{APIM_SUBSCRIPTION_KEY}}"
+   }
+   ```
 
-1. Make sure that the Debug mode is set to `Blazor & Facade`.
-1. Run debug mode by pressing `F5` key.
-1. Choose `Assistant.ApiApp.SwaFacade`.
+   - `{{AZURE_ENV_NAME}}`: Azure environment name. It looks like `assistant****` where `****` is a random number.
+   - `{{APIM_SUBSCRIPTION_KEY}}`: Subscription Key of Azure API Management.
+
+### `appsettings.Development.json` - `ApimPolicyAssistant.WebApp.BlazorServer`
+
+1. Copy `appsettings.json` to `appsettings.Development.json`.
+1. Substitute the following sections with the actual values:
+
+   ```json
+   "Apim": {
+     "BaseUrl": "https://apim-{{AZURE_ENV_NAME}}.azure-api.net/aoai",
+     "SubscriptionKey": "{{APIM_SUBSCRIPTION_KEY}}"
+   }
+   ```
+
+   - `{{AZURE_ENV_NAME}}`: Azure environment name. It looks like `assistant****` where `****` is a random number.
+   - `{{APIM_SUBSCRIPTION_KEY}}`: Subscription Key of Azure API Management.
+
+### `appsettings.Development.json` - `ApimPolicyAssistant.HybridApp.BlazorMaui`
+
+1. Copy `appsettings.json` to `appsettings.Development.json`.
+1. Substitute the following sections with the actual values:
+
+   ```json
+   "Apim": {
+     "BaseUrl": "https://apim-{{AZURE_ENV_NAME}}.azure-api.net/aoai",
+     "SubscriptionKey": "{{APIM_SUBSCRIPTION_KEY}}"
+   }
+   ```
+
+   - `{{AZURE_ENV_NAME}}`: Azure environment name. It looks like `assistant****` where `****` is a random number.
+   - `{{APIM_SUBSCRIPTION_KEY}}`: Subscription Key of Azure API Management.
+
+### `appsettings.Development.json` - `ApimPolicyAssistant.HybridApp.BlazorWinForm`
+
+1. Copy `appsettings.json` to `appsettings.Development.json`.
+1. Substitute the following sections with the actual values:
+
+   ```json
+   "Apim": {
+     "BaseUrl": "https://apim-{{AZURE_ENV_NAME}}.azure-api.net/aoai",
+     "SubscriptionKey": "{{APIM_SUBSCRIPTION_KEY}}"
+   }
+   ```
+
+   - `{{AZURE_ENV_NAME}}`: Azure environment name. It looks like `assistant****` where `****` is a random number.
+   - `{{APIM_SUBSCRIPTION_KEY}}`: Subscription Key of Azure API Management.
+
+### `appsettings.Development.json` - `ApimPolicyAssistant.HybridApp.BlazorWpf`
+
+1. Copy `appsettings.json` to `appsettings.Development.json`.
+1. Substitute the following sections with the actual values:
+
+   ```json
+   "Apim": {
+     "BaseUrl": "https://apim-{{AZURE_ENV_NAME}}.azure-api.net/aoai",
+     "SubscriptionKey": "{{APIM_SUBSCRIPTION_KEY}}"
+   }
+   ```
+
+   - `{{AZURE_ENV_NAME}}`: Azure environment name. It looks like `assistant****` where `****` is a random number.
+   - `{{APIM_SUBSCRIPTION_KEY}}`: Subscription Key of Azure API Management.
+
+## TO-DO
+
+- Bicep for Azure Static Web Apps
+- Bicep for Azure App Service - Blazor Server and ASP.NET WebForm
