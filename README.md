@@ -1,13 +1,20 @@
 # Azure API Management Policy Assistant
 
-It's your friendly assistant to generate [Azure API Management policy documents](https://learn.microsoft.com/azure/api-management/api-management-howto-policies), using [Azure OpenAI Service](https://learn.microsoft.com/azure/ai-services/openai/overview).
+It's your friendly assistant to generate [Azure API Management policy documents](https://learn.microsoft.com/azure/api-management/api-management-howto-policies?WT.mc_id=dotnet-102583-juyoo), using [Azure OpenAI Service](https://learn.microsoft.com/azure/ai-services/openai/overview?WT.mc_id=dotnet-102583-juyoo).
+
+## Readings
+
+- English:
+  - [GitHub Copilot for Azure API Management Policies](https://techcommunity.microsoft.com/t5/apps-on-azure-blog/github-copilot-for-azure-api-management-policies/ba-p/3884229?WT.mc_id=dotnet-102583-juyoo)
+- 한국어:
+  - [GitHub 코파일럿으로 손쉽게 APIM 정책 문서 작성하기](https://blog.aliencube.org/ko/2023/07/31/gh-copilot-for-apim-policies/)
 
 ## Prerequisites
 
-- [Azure Subscription](https://azure.microsoft.com/free)
-- [Azure OpenAI Service](https://learn.microsoft.com/azure/ai-services/openai/overview)
-- [Azure CLI](https://learn.microsoft.com/cli/azure/what-is-azure-cli)
-- [Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/overview)
+- [Azure Subscription](https://azure.microsoft.com/free?WT.mc_id=dotnet-102583-juyoo)
+- [Azure OpenAI Service](https://learn.microsoft.com/azure/ai-services/openai/overview?WT.mc_id=dotnet-102583-juyoo)
+- [Azure CLI](https://learn.microsoft.com/cli/azure/what-is-azure-cli?WT.mc_id=dotnet-102583-juyoo)
+- [Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/overview?WT.mc_id=dotnet-102583-juyoo)
 - [GitHub CLI](https://cli.github.com)
 - [Azure Static Web Apps CLI](https://github.com/Azure/static-web-apps-cli)
 
@@ -169,3 +176,5 @@ It's your friendly assistant to generate [Azure API Management policy documents]
 
 - Bicep for Azure Static Web Apps
 - Bicep for Azure App Service - Blazor Server and ASP.NET WebForm
+- [Microsoft Graph](https://developer.microsoft.com/graph?WT.mc_id=dotnet-102583-juyoo) integration
+- [Microsoft Teams](https://learn.microsoft.com/microsoftteams/platform/sbs-gs-blazorupdate?WT.mc_id=dotnet-102583-juyoo) integration
