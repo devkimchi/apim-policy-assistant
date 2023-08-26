@@ -14,6 +14,7 @@ env:
   AZURE_RESOURCE_GROUP_NAME: 'rg-${{ vars.AZURE_ENV_NAME }}'
   AZURE_FNCAPP_NAME: 'fncapp-${{ vars.AZURE_ENV_NAME }}'
   AZURE_APIM_NAME: 'apim-${{ vars.AZURE_ENV_NAME }}'
+  AZURE_STTAPP_NAME: 'sttapp-${{ vars.AZURE_ENV_NAME }}'
 
 jobs:
   build-test:
@@ -48,20 +49,19 @@ jobs:
     - name: Test solution
       shell: bash
       run: |
-        dotnet test ApimPolicyAssistant.sln -c Release --no-build
+        dotnet test ApimPolicyAssistant.sln -c Release
 
     - name: Create artifacts - Web
       shell: bash
       run: |
-        dotnet publish src/ApimPolicyAssistant.ApiApp -c Release --no-build
-        dotnet publish src/ApimPolicyAssistant.ApiApp.SwaFacade -c Release --no-build
-        dotnet publish src/ApimPolicyAssistant.WebApp.BlazorServer -c Release --no-build
-        dotnet publish src/ApimPolicyAssistant.WebApp.BlazorWasm -c Release --no-build
+        dotnet publish src/ApimPolicyAssistant.ApiApp -c Release
+        dotnet publish src/ApimPolicyAssistant.ApiApp.SwaFacade -c Release
+        dotnet publish src/ApimPolicyAssistant.WebApp.BlazorWasm -c Release
 
-    - name: Create artifacts - MAUI (Android)
-      shell: bash
-      run: |
-        dotnet publish src/ApimPolicyAssistant.HybridApp.BlazorMaui -c Release -f net7.0-android
+    # - name: Create artifacts - MAUI (Android)
+    #   shell: bash
+    #   run: |
+    #     dotnet publish src/ApimPolicyAssistant.HybridApp.BlazorMaui -c Release -f net7.0-android
 
     # - name: Create artifacts - MAUI (UWP)
     #   shell: bash
@@ -78,14 +78,26 @@ jobs:
     #   run: |
     #     dotnet publish src/ApimPolicyAssistant.HybridApp.BlazorWpf -c Release -f net7.0-windows
 
-    - name: Upload artifact
+    - name: Upload artifact - API
       uses: actions/upload-artifact@v2
       with:
         name: apiapp
         path: src/ApimPolicyAssistant.ApiApp/bin/Release/net7.0/publish
 
-  deploy:
-    name: Deploy
+    - name: Upload artifact - Facade
+      uses: actions/upload-artifact@v2
+      with:
+        name: facadeapp
+        path: src/ApimPolicyAssistant.ApiApp.SwaFacade/bin/Release/net7.0/publish
+
+    - name: Upload artifact - Web
+      uses: actions/upload-artifact@v2
+      with:
+        name: webapp
+        path: src/ApimPolicyAssistant.WebApp.BlazorWasm/bin/Release/net7.0/publish
+
+  deploy-api:
+    name: Deploy API
 
     needs:
     - build-test
@@ -93,7 +105,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Download artifact
+    - name: Download artifact - API
       uses: actions/download-artifact@v2
       with:
         name: apiapp
@@ -127,3 +139,58 @@ jobs:
           --named-value-id "X_FUNCTIONS_KEY_AOAI" \
           --value $functionKey \
           --secret true
+
+  deploy-web:
+    name: Deploy Web
+
+    needs:
+    - build-test
+
+    runs-on: ubuntu-latest
+
+    steps:
+    # - name: Install SWA CLI
+    #   shell: bash
+    #   run: |
+    #     npm install -g @azure/static-web-apps-cli
+
+    - name: Download artifact - Facade
+      uses: actions/download-artifact@v2
+      with:
+        name: facadeapp
+        path: published/facadeapp
+
+    - name: Download artifact - Web
+      uses: actions/download-artifact@v2
+      with:
+        name: webapp
+        path: published/webapp
+
+    - name: Login to Azure
+      uses: azure/login@v1
+      with:
+        client-id: ${{ vars.AZURE_CLIENT_ID }}
+        tenant-id: ${{ vars.AZURE_TENANT_ID }}
+        subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+
+    - name: Get SWA token
+      shell: bash
+      run: |
+        swa_token=$(az staticwebapp secrets list \
+        -g ${{ env.AZURE_RESOURCE_GROUP_NAME }} \
+        -n ${{ env.AZURE_STTAPP_NAME }}-web \
+        --query "properties.apiKey" -o tsv)
+
+        echo "::add-mask::$swa_token"
+        echo "SWA_TOKEN=$swa_token" >> $GITHUB_ENV
+
+    - name: Deploy API app to Azure
+      uses: Azure/static-web-apps-deploy@v1
+      with:
+        azure_static_web_apps_api_token: ${{ env.SWA_TOKEN }}
+        action: 'upload'
+        skip_app_build: true
+        app_location: 'published/webapp/wwwroot'
+        output_location: ''
+        skip_api_build: true
+        api_location: 'published/facadeapp'
