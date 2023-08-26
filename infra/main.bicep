@@ -71,6 +71,20 @@ module apim './provision-ApiManagement.bicep' = {
   }
 }
 
+module sttapp './provision-staticWebApp.bicep' = {
+  name: 'StaticWebApp'
+  scope: rg
+  dependsOn: [
+    apim
+  ]
+  params: {
+    name: name
+    location: 'eastasia'
+    apiManagementName: apim.outputs.name
+    apiManagementSubscriptionKey: apim.outputs.subscriptionKey
+  }
+}
+
 module fncapps './provision-FunctionApp.bicep' = [for (app, index) in apps: if (app.isFunctionApp == true) {
   name: 'FunctionApp_${app.apiName}'
   scope: rg

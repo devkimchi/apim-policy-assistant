@@ -48,15 +48,18 @@ var namedValues = [
   }
 ]
 
-var products = [
-  {
-    name: 'default'
-    displayName: 'Default Product'
-    description: 'This is the default product created by the template, which includes all APIs.'
-    state: 'published'
-    subscriptionRequired: true
-  }
-]
+var product = {
+  name: 'default'
+  displayName: 'Default Product'
+  description: 'This is the default product created by the template, which includes all APIs.'
+  state: 'published'
+  subscriptionRequired: true
+}
+
+var subscription = {
+  name: 'default'
+  displayName: 'Default Subscription'
+}
 
 resource apim 'Microsoft.ApiManagement/service@2022-08-01' = {
   name: apiManagement.name
@@ -106,7 +109,7 @@ resource apimpolicy 'Microsoft.ApiManagement/service/policies@2022-08-01' = {
   }
 }
 
-resource apimproducts 'Microsoft.ApiManagement/service/products@2022-08-01' = [for (product, index) in products: {
+resource apimproduct 'Microsoft.ApiManagement/service/products@2022-08-01' = {
   name: '${apim.name}/${product.name}'
   properties: {
     displayName: product.displayName
@@ -114,7 +117,16 @@ resource apimproducts 'Microsoft.ApiManagement/service/products@2022-08-01' = [f
     state: product.state
     subscriptionRequired: product.subscriptionRequired
   }
-}]
+}
+
+resource apimsubscription 'Microsoft.ApiManagement/service/subscriptions@2022-08-01' = {
+  name: '${apim.name}/${subscription.name}'
+  properties: {
+    displayName: subscription.displayName
+    scope: apimproduct.id
+  }
+}
 
 output id string = apim.id
 output name string = apim.name
+output subscriptionKey string = apimsubscription.listSecrets('2022-08-01').primaryKey

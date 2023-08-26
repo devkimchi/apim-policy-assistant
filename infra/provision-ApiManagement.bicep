@@ -51,3 +51,4 @@ module apim './apiManagement.bicep' = {
 
 output id string = apim.outputs.id
 output name string = apim.outputs.name
+output subscriptionKey string = apim.outputs.subscriptionKey
