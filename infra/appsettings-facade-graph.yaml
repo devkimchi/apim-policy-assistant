@@ -1,0 +1,6 @@
+- name: 'MSGraph__TenantId'
+  value: 'to_be_updated'
+- name: 'MSGraph__ClientId'
+  value: 'to_be_updated'
+- name: 'MSGraph__ClientSecret'
+  value: 'to_be_updated'

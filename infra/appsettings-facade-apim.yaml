@@ -1,0 +1,4 @@
+- name: 'Apim__BaseUrl'
+  value: 'to_be_updated'
+- name: 'Apim__SubscriptionKey'
+  value: 'to_be_updated'

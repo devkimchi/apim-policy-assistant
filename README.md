@@ -174,7 +174,6 @@ It's your friendly assistant to generate [Azure API Management policy documents]
 
 ## TO-DO
 
-- Bicep for Azure Static Web Apps
-- Bicep for Azure App Service - Blazor Server and ASP.NET WebForm
+- Script for local development configuration
 - [Microsoft Graph](https://developer.microsoft.com/graph?WT.mc_id=dotnet-102583-juyoo) integration
 - [Microsoft Teams](https://learn.microsoft.com/microsoftteams/platform/sbs-gs-blazorupdate?WT.mc_id=dotnet-102583-juyoo) integration

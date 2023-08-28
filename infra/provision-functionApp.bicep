@@ -6,11 +6,36 @@ param tags object = {}
 
 param storageContainerName string
 
-param aoaiApiVersion string = '2023-06-01-preview'
-param aoaiDeploymentId string
-param aoaiEndpoint string
-@secure()
-param aoaiAuthKey string
+param openApiSettings array = [
+  {
+    name: ''
+    value: ''
+  }
+]
+param aoaiServiceSettings array = [
+  {
+    name: ''
+    value: ''
+  }
+]
+param promptSettings array = [
+  {
+    name: ''
+    value: ''
+  }
+]
+param apimSettings array = [
+  {
+    name: ''
+    value: ''
+  }
+]
+param graphSettings array = [
+  {
+    name: ''
+    value: ''
+  }
+]
 
 var shortname = '${name}${replace(suffix, '-', '')}'
 var longname = '${name}-${suffix}'
@@ -63,10 +88,11 @@ module fncapp './functionApp.bicep' = {
     storageAccountConnectionString: st.outputs.connectionString
     appInsightsInstrumentationKey: appins.outputs.instrumentationKey
     appInsightsConnectionString: appins.outputs.connectionString
-    aoaiApiVersion: aoaiApiVersion
-    aoaiDeploymentId: aoaiDeploymentId
-    aoaiEndpoint: aoaiEndpoint
-    aoaiAuthKey: aoaiAuthKey
     consumptionPlanId: csplan.outputs.id
+    openApiSettings: openApiSettings
+    aoaiServiceSettings: aoaiServiceSettings
+    promptSettings: promptSettings
+    apimSettings: apimSettings
+    graphSettings: graphSettings
   }
 }

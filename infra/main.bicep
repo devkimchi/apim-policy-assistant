@@ -21,21 +21,6 @@ var tags = {
   // Tag all resources with the environment name.
   'azd-env-name': name
 }
-var apps = [
-  {
-    isFunctionApp: true
-    functionAppSuffix: 'aoai'
-    apiName: 'AOAI'
-    apiPath: 'aoai'
-    apiServiceUrl: 'https://fncapp-{{AZURE_ENV_NAME}}-{{SUFFIX}}.azurewebsites.net/api'
-    apiReferenceUrl: 'https://raw.githubusercontent.com/${gitHubUsername}/${gitHubRepositoryName}/${gitHubBranchName}/infra/openapi-{{SUFFIX}}.{{EXTENSION}}'
-    apiFormat: 'openapi-link'
-    apiExtension: 'yaml'
-    apiSubscription: true
-    apiProduct: 'default'
-    apiOperations: []
-  }
-]
 var storageContainerName = 'openapis'
 
 resource rg 'Microsoft.Resources/resourceGroups@2021-04-01' = {
@@ -57,6 +42,47 @@ module cogsvc './provision-CognitiveServices.bicep' = {
   }
 }
 
+var apps = [
+  {
+    name: 'aoai'
+    isFunctionApp: true
+    functionAppSuffix: 'aoai'
+    appSettings: {
+      openApi: loadYamlContent('./appsettings-aoai-openapi.yaml')
+      aoaiService: loadYamlContent('./appsettings-aoai-openai.yaml')
+      prompt: loadYamlContent('./appsettings-aoai-prompt.yaml')
+      apim: []
+      graph: []
+    }
+    apimIntegrated: true
+    api: {
+      name: 'AOAI'
+      path: 'aoai'
+      serviceUrl: 'https://fncapp-{{AZURE_ENV_NAME}}-{{SUFFIX}}.azurewebsites.net/api'
+      referenceUrl: 'https://raw.githubusercontent.com/${gitHubUsername}/${gitHubRepositoryName}/${gitHubBranchName}/infra/openapi-{{SUFFIX}}.{{EXTENSION}}'
+      format: 'openapi-link'
+      extension: 'yaml'
+      subscription: true
+      product: 'default'
+      operations: []
+    }
+  }
+  {
+    name: 'facade'
+    isFunctionApp: true
+    functionAppSuffix: 'facade'
+    appSettings: {
+      openApi: loadYamlContent('./appsettings-facade-openapi.yaml')
+      aoaiService: []
+      prompt: []
+      apim: loadYamlContent('./appsettings-facade-apim.yaml')
+      graph: loadYamlContent('./appsettings-facade-graph.yaml')
+    }
+    apimIntegrated: false
+    api: {}
+  }
+]
+
 module apim './provision-ApiManagement.bicep' = {
   name: 'ApiManagement'
   scope: rg
@@ -71,22 +97,8 @@ module apim './provision-ApiManagement.bicep' = {
   }
 }
 
-module sttapp './provision-staticWebApp.bicep' = {
-  name: 'StaticWebApp'
-  scope: rg
-  dependsOn: [
-    apim
-  ]
-  params: {
-    name: name
-    location: 'eastasia'
-    apiManagementName: apim.outputs.name
-    apiManagementSubscriptionKey: apim.outputs.subscriptionKey
-  }
-}
-
 module fncapps './provision-FunctionApp.bicep' = [for (app, index) in apps: if (app.isFunctionApp == true) {
-  name: 'FunctionApp_${app.apiName}'
+  name: 'FunctionApp_${app.name}'
   scope: rg
   dependsOn: [
     apim
@@ -97,15 +109,30 @@ module fncapps './provision-FunctionApp.bicep' = [for (app, index) in apps: if (
     location: location
     tags: tags
     storageContainerName: storageContainerName
-    aoaiApiVersion: '2023-06-01-preview'
-    aoaiDeploymentId: cogsvc.outputs.deploymentId
-    aoaiEndpoint: cogsvc.outputs.endpoint
-    aoaiAuthKey: cogsvc.outputs.apiKey
+    openApiSettings: app.appSettings.openApi
+    aoaiServiceSettings: app.appSettings.aoaiService
+    promptSettings: app.appSettings.prompt
+    apimSettings: app.appSettings.apim
+    graphSettings: app.appSettings.graph
   }
 }]
 
-module apis './provision-ApiManagementApi.bicep' = [for (app, index) in apps: {
-  name: 'ApiManagementApi_${app.apiName}'
+module sttapp './provision-staticWebApp.bicep' = {
+  name: 'StaticWebApp'
+  scope: rg
+  dependsOn: [
+    apim
+    fncapps
+  ]
+  params: {
+    name: name
+    location: 'eastasia'
+    tags: tags
+  }
+}
+
+module apis './provision-ApiManagementApi.bicep' = [for (app, index) in apps: if (app.apimIntegrated == true) {
+  name: 'ApiManagementApi_${app.name}'
   scope: rg
   dependsOn: [
     apim
@@ -113,17 +140,17 @@ module apis './provision-ApiManagementApi.bicep' = [for (app, index) in apps: {
   params: {
     name: name
     location: location
-    apiManagementApiName: app.apiName
-    apiManagementApiDisplayName: app.apiName
-    apiManagementApiDescription: app.apiName
-    apiManagementApiSubscriptionRequired: app.apiSubscription
-    apiManagementApiServiceUrl: replace(replace(app.apiServiceUrl, '{{AZURE_ENV_NAME}}', name), '{{SUFFIX}}', app.functionAppSuffix)
-    apiManagementApiPath: app.apiPath
-    apiManagementApiFormat: app.apiFormat
-    apiManagementApiValue: replace(replace(app.apiReferenceUrl, '{{SUFFIX}}', app.functionAppSuffix), '{{EXTENSION}}', app.apiExtension)
+    apiManagementApiName: app.api.name
+    apiManagementApiDisplayName: app.api.name
+    apiManagementApiDescription: app.api.name
+    apiManagementApiSubscriptionRequired: app.api.subscription
+    apiManagementApiServiceUrl: replace(replace(app.api.serviceUrl, '{{AZURE_ENV_NAME}}', name), '{{SUFFIX}}', app.functionAppSuffix)
+    apiManagementApiPath: app.api.path
+    apiManagementApiFormat: app.api.format
+    apiManagementApiValue: replace(replace(app.api.referenceUrl, '{{SUFFIX}}', app.functionAppSuffix), '{{EXTENSION}}', app.api.extension)
     apiManagementApiPolicyFormat: 'xml-link'
-    apiManagementApiPolicyValue: 'https://raw.githubusercontent.com/${gitHubUsername}/${gitHubRepositoryName}/${gitHubBranchName}/infra/apim-policy-api-${replace(toLower(app.apiName), '-', '')}.xml'
-    apiManagementApiOperations: app.apiOperations
-    apiManagementProductName: app.apiProduct
+    apiManagementApiPolicyValue: 'https://raw.githubusercontent.com/${gitHubUsername}/${gitHubRepositoryName}/${gitHubBranchName}/infra/apim-policy-api-${replace(toLower(app.api.name), '-', '')}.xml'
+    apiManagementApiOperations: app.api.operations
+    apiManagementProductName: app.api.product
   }
 }]

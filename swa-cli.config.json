@@ -2,8 +2,8 @@
   "$schema": "https://aka.ms/azure/static-web-apps-cli/schema",
   "configurations": {
     "apim-policy-assistant": {
-      "appLocation": "src/Assistant.BlazorWasmApp",
-      "apiLocation": "src/Assistant.FacadeApp",
+      "appLocation": "src/ApimPolicyAssistant.WebApp.BlazorWasm",
+      "apiLocation": "src/ApimPolicyAssistant.ApiApp.SwaFacade",
       "outputLocation": "bin/wwwroot",
       "apiLanguage": "dotnetisolated",
       "apiVersion": "7.0",

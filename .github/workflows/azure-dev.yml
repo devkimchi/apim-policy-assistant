@@ -15,16 +15,22 @@ env:
   AZURE_FNCAPP_NAME: 'fncapp-${{ vars.AZURE_ENV_NAME }}'
   AZURE_APIM_NAME: 'apim-${{ vars.AZURE_ENV_NAME }}'
   AZURE_STTAPP_NAME: 'sttapp-${{ vars.AZURE_ENV_NAME }}'
+  AZURE_OPENAI_NAME: 'aoai-${{ vars.AZURE_ENV_NAME }}'
 
 jobs:
-  build-test:
-    name: Build & Test
+  build-test-deploy:
+    name: Build Test Deploy
 
     runs-on: ubuntu-latest
 
     steps:
     - name: Checkout
       uses: actions/checkout@v3
+
+    # - name: Setup SWA CLI
+    #   shell: bash
+    #   run: |
+    #     npm install -g @azure/static-web-apps-cli
 
     - name: Setup .NET SDK
       uses: actions/setup-dotnet@v1
@@ -78,39 +84,6 @@ jobs:
     #   run: |
     #     dotnet publish src/ApimPolicyAssistant.HybridApp.BlazorWpf -c Release -f net7.0-windows
 
-    - name: Upload artifact - API
-      uses: actions/upload-artifact@v2
-      with:
-        name: apiapp
-        path: src/ApimPolicyAssistant.ApiApp/bin/Release/net7.0/publish
-
-    - name: Upload artifact - Facade
-      uses: actions/upload-artifact@v2
-      with:
-        name: facadeapp
-        path: src/ApimPolicyAssistant.ApiApp.SwaFacade/bin/Release/net7.0/publish
-
-    - name: Upload artifact - Web
-      uses: actions/upload-artifact@v2
-      with:
-        name: webapp
-        path: src/ApimPolicyAssistant.WebApp.BlazorWasm/bin/Release/net7.0/publish
-
-  deploy-api:
-    name: Deploy API
-
-    needs:
-    - build-test
-
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Download artifact - API
-      uses: actions/download-artifact@v2
-      with:
-        name: apiapp
-        path: published/apiapp
-
     - name: Login to Azure
       uses: azure/login@v1
       with:
@@ -122,56 +95,13 @@ jobs:
       uses: azure/webapps-deploy@v2
       with:
         app-name: '${{ env.AZURE_FNCAPP_NAME }}-aoai'
-        package: published/apiapp
+        package: src/ApimPolicyAssistant.ApiApp/bin/Release/net7.0/publish
 
-    - name: Update APIM settings
-      shell: bash
-      run: |
-        functionKey=$(az functionapp keys list \
-          --resource-group "${{ env.AZURE_RESOURCE_GROUP_NAME }}" \
-          --name "${{ env.AZURE_FNCAPP_NAME }}-aoai" \
-          --query "functionKeys.default" \
-          --output tsv)
-
-        az apim nv update \
-          --resource-group ${{ env.AZURE_RESOURCE_GROUP_NAME }} \
-          --service-name ${{ env.AZURE_APIM_NAME }} \
-          --named-value-id "X_FUNCTIONS_KEY_AOAI" \
-          --value $functionKey \
-          --secret true
-
-  deploy-web:
-    name: Deploy Web
-
-    needs:
-    - build-test
-
-    runs-on: ubuntu-latest
-
-    steps:
-    # - name: Install SWA CLI
-    #   shell: bash
-    #   run: |
-    #     npm install -g @azure/static-web-apps-cli
-
-    - name: Download artifact - Facade
-      uses: actions/download-artifact@v2
+    - name: Deploy Facade app to Azure
+      uses: azure/webapps-deploy@v2
       with:
-        name: facadeapp
-        path: published/facadeapp
-
-    - name: Download artifact - Web
-      uses: actions/download-artifact@v2
-      with:
-        name: webapp
-        path: published/webapp
-
-    - name: Login to Azure
-      uses: azure/login@v1
-      with:
-        client-id: ${{ vars.AZURE_CLIENT_ID }}
-        tenant-id: ${{ vars.AZURE_TENANT_ID }}
-        subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+        app-name: '${{ env.AZURE_FNCAPP_NAME }}-facade'
+        package: src/ApimPolicyAssistant.ApiApp.SwaFacade/bin/Release/net7.0/publish
 
     - name: Get SWA token
       shell: bash
@@ -184,13 +114,91 @@ jobs:
         echo "::add-mask::$swa_token"
         echo "SWA_TOKEN=$swa_token" >> $GITHUB_ENV
 
-    - name: Deploy API app to Azure
+    # - name: Deploy SWA to Azure
+    #   shell: bash
+    #   run: |
+    #     swa deploy \
+    #       --deployment-token ${{ env.SWA_TOKEN }} \
+    #       --app-location 'src/ApimPolicyAssistant.WebApp.BlazorWasm/bin/Release/net7.0/publish/wwwroot' \
+    #       --output-location '' \
+    #       --api-location '' \
+    #       --env default
+
+    - name: Deploy SWA to Azure
       uses: Azure/static-web-apps-deploy@v1
       with:
         azure_static_web_apps_api_token: ${{ env.SWA_TOKEN }}
-        action: 'upload'
-        skip_app_build: true
-        app_location: 'published/webapp/wwwroot'
-        output_location: ''
-        skip_api_build: true
-        api_location: 'published/facadeapp'
+        action: "upload"
+        app_location: 'src/ApimPolicyAssistant.WebApp.BlazorWasm'
+        api_location: ''
+        # api_location: 'src/ApimPolicyAssistant.ApiApp.SwaFacade'
+        output_location: 'wwwroot'
+        # app_build_command: 'dotnet publish -c Release -o bin'
+        # api_build_command: 'dotnet publish -c Release'
+
+    - name: Update APIM settings
+      shell: bash
+      run: |
+        functionKey=$(az functionapp keys list \
+          --resource-group "${{ env.AZURE_RESOURCE_GROUP_NAME }}" \
+          --name "${{ env.AZURE_FNCAPP_NAME }}-aoai" \
+          --query "functionKeys.default" \
+          --output tsv)
+
+        nv=$(az apim nv update \
+          --resource-group ${{ env.AZURE_RESOURCE_GROUP_NAME }} \
+          --service-name ${{ env.AZURE_APIM_NAME }} \
+          --named-value-id "X_FUNCTIONS_KEY_AOAI" \
+          --value $functionKey \
+          --secret true)
+
+    - name: Update API settings - API
+      shell: bash
+      run: |
+        endpoint=$(az cognitiveservices account show \
+          --resource-group "${{ env.AZURE_RESOURCE_GROUP_NAME }}" \
+          --name "${{ env.AZURE_OPENAI_NAME }}" \
+          --query "properties.endpoint" -o tsv)
+
+        apikey=$(az cognitiveservices account keys list \
+          --resource-group "${{ env.AZURE_RESOURCE_GROUP_NAME }}" \
+          --name "${{ env.AZURE_OPENAI_NAME }}" \
+          --query "key1" -o tsv)
+
+        appsettings=$(az functionapp config appsettings set \
+          --resource-group "${{ env.AZURE_RESOURCE_GROUP_NAME }}" \
+          --name "${{ env.AZURE_FNCAPP_NAME }}-aoai" \
+          --settings "OpenAIApi__Endpoint=$endpoint")
+
+        appsettings=$(az functionapp config appsettings set \
+          --resource-group "${{ env.AZURE_RESOURCE_GROUP_NAME }}" \
+          --name "${{ env.AZURE_FNCAPP_NAME }}-aoai" \
+          --settings "OpenAIApi__AuthKey=$apikey")
+
+    - name: Update API settings - Facade
+      shell: bash
+      run: |
+        baseUrl="$(az apim show \
+          --resource-group "${{ env.AZURE_RESOURCE_GROUP_NAME }}" \
+          --name "${{ env.AZURE_APIM_NAME }}" \
+          --query "gatewayUrl" -o tsv)/aoai"
+
+        apimId=$(az apim show \
+          --resource-group "${{ env.AZURE_RESOURCE_GROUP_NAME }}" \
+          --name "${{ env.AZURE_APIM_NAME }}" \
+          --query "id" -o tsv)
+
+        subscriptionKey=$(az rest \
+          --method post \
+          --url "$apimId/subscriptions/default/listSecrets?api-version=2022-08-01" \
+          --query "primaryKey" -o tsv)
+
+        appsettings=$(az functionapp config appsettings set \
+          --resource-group "${{ env.AZURE_RESOURCE_GROUP_NAME }}" \
+          --name "${{ env.AZURE_FNCAPP_NAME }}-facade" \
+          --settings "Apim__BaseUrl=$baseUrl")
+
+        appsettings=$(az functionapp config appsettings set \
+          --resource-group "${{ env.AZURE_RESOURCE_GROUP_NAME }}" \
+          --name "${{ env.AZURE_FNCAPP_NAME }}-facade" \
+          --settings "Apim__SubscriptionKey=$subscriptionKey")

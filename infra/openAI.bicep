@@ -3,15 +3,7 @@ param location string = 'eastus'
 
 param tags object = {}
 
-param aoaiModels array = [
-  {
-    name: 'gpt-35-turbo-16k'
-    deploymentName: 'model-gpt35turbo16k'
-    version: '0613'
-    skuName: 'Standard'
-    skuCapacity: 30
-  }
-]
+param aoaiModels array = loadYamlContent('./aoai-models.yaml')
 
 var openai = {
     name: 'aoai-${name}'

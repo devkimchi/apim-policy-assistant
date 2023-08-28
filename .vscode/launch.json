@@ -13,6 +13,13 @@
       "request": "launch",
       "projectPath": "${workspaceFolder}/src/ApimPolicyAssistant.WebApp.BlazorWasm/ApimPolicyAssistant.WebApp.BlazorWasm.csproj",
       "launchConfigurationId": "TargetFramework=;https"
+    },
+    {
+      "name": ".NET MAUI",
+      "type": "maui",
+      "request": "launch",
+      "preLaunchTask": "maui: Build",
+      "cwd": "${workspaceFolder}/src/ApimPolicyAssistant.HybridApp.BlazorMaui"
     }
   ],
   "compounds": [
